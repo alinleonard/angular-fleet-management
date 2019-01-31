@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form>
+      <div class="row">
+        <div class="col-xs-12">
+            <label for="name">Name</label>
+            <input 
+              type="text"
+              id="name"
+              class="form-control"
+              [(ngModel)]="vehicle.name"
+              name="name">
+            <label for="manufacturer">Manufacturer</label>
+            <input 
+              type="text"
+              id="manufacturer"
+              class="form-control"
+              [(ngModel)]="vehicle.manufacturer"
+              name="manufacturer">
+            <label for="model">Model</label>
+            <input 
+              type="text"
+              id="model" 
+              class="form-control" 
+              [(ngModel)]="vehicle.model"
+              name="model">
+            <label for="year">Year</label>
+            <input 
+              type="number"
+              id="year" 
+              class="form-control" 
+              [(ngModel)]="vehicle.year"
+              name="year">
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <button (click)="onSubmit()" class="btn btn-success sorted" type="submit">Add</button>
+          <button (click)="onClear()" class="btn btn-primary" type="button">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

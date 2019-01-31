@@ -18,6 +18,9 @@ export class VehicleComponent implements OnInit {
 
   ngOnInit() {
     this.vehicles = this.vService.getVehicles();
+    this.vService.onVehicleChanged.subscribe((vehicles) => {
+      this.vehicles = vehicles;
+    });
 
     this.vService.onSelectedVehicle.subscribe((sVehicle) => {
       this.selectedVehicle = sVehicle;
