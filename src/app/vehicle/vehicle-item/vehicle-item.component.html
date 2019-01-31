@@ -1,0 +1,9 @@
+<a (click)="onVehicleSelected()" class="list-group-item clearfix" style="cursor: pointer;">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ vehicle.name }}</h4>
+    <p class="list-group-item-text">{{ vehicle.manufacturer }} - {{ vehicle.model }}</p>
+  </div>
+  <span class="pull-right">
+    {{ vehicle.year }}
+  </span>
+</a>
