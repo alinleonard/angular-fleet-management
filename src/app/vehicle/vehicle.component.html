@@ -9,18 +9,9 @@
     <app-vehicle-item [vehicle]="vehicle" *ngFor="let vehicle of vehicles"></app-vehicle-item>
   </div>
   <div class="col-xs-7" *ngIf="selectedVehicle; else infoText">
-    <div class="row">
-      <div class="col-xs-12">
-        <h1>{{ selectedVehicle.name }}</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        {{ selectedVehicle.manufacturer }} - {{ selectedVehicle.model }} - {{ selectedVehicle.year }}
-      </div>
-    </div>
+    <app-vehicle-detail [vehicle]="selectedVehicle"></app-vehicle-detail>
   </div>
   <ng-template #infoText>
-    <p>Please select a Vehicle</p>
+    <h3>Please select a Vehicle</h3>
   </ng-template>
 </div>

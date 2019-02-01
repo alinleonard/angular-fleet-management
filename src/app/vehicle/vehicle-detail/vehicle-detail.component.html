@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>{{ vehicle.name }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ vehicle.manufacturer }} - {{ vehicle.model }} - {{ vehicle.year }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let reminder of vehicle.reminders">
+        {{ reminder.reminder.name }}
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <form>
+      <label for="reminder">Reminder</label>
+      <select #reminderInput name="reminder" class="form-control">
+        <option *ngFor="let reminder of reminders" [value]="reminder._id">{{ reminder.name }}</option>
+      </select>
+      <label for="trigger">Expiration date</label>
+      <input #triggerDateInput name="trigger" type="date" class="form-control">
+      <label class="checkbox checkbox-inline"><input #checkboxInput type="checkbox"> Alert on Email</label>
+      <hr>
+      <button (click)="onAddReminder()" class="btn btn-success">Add</button>
+    </form>
+  </div>
+</div>

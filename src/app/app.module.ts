@@ -7,6 +7,12 @@ import { HeaderComponent } from './header/header.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehicleItemComponent } from './vehicle/vehicle-item/vehicle-item.component';
 import { VehicleEditComponent } from './vehicle/vehicle-edit/vehicle-edit.component';
+import { ReminderComponent } from './reminder/reminder.component';
+import { AppRoutingModule } from './app-routing.module';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ReminderRenewalListComponent } from './reminder/reminder-renewal-list/reminder-renewal-list.component';
+import { ReminderRenewalItemComponent } from './reminder/reminder-renewal-list/reminder-renewal-item/reminder-renewal-item.component';
+import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +20,17 @@ import { VehicleEditComponent } from './vehicle/vehicle-edit/vehicle-edit.compon
     HeaderComponent,
     VehicleComponent,
     VehicleItemComponent,
-    VehicleEditComponent
+    VehicleEditComponent,
+    ReminderComponent,
+    NotFoundComponent,
+    ReminderRenewalListComponent,
+    ReminderRenewalItemComponent,
+    VehicleDetailComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
