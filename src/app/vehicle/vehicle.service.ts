@@ -1,9 +1,9 @@
-import { EventEmitter, Output } from '@angular/core';
 import { Vehicle } from './vehicle.model';
 import { Reminder } from '../shared/reminder.module';
+import { Subject } from 'rxjs';
 
 export class VehicleService {
-    @Output() vehicleChanged = new EventEmitter<Vehicle[]>();
+    vehicleChanged = new Subject<Vehicle[]>();
 
     private vehicles: Vehicle[] = [
         {
@@ -36,6 +36,6 @@ export class VehicleService {
     addVehicleItem(vehicle: Vehicle) {
         vehicle._id = this.vehicles.length + 1;
         this.vehicles.push(vehicle);
-        this.vehicleChanged.emit(this.vehicles.slice());
+        this.vehicleChanged.next(this.vehicles.slice());
     }
 }
