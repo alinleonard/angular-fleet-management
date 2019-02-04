@@ -8,10 +8,7 @@
     <hr>
     <app-vehicle-item [vehicle]="vehicle" *ngFor="let vehicle of vehicles"></app-vehicle-item>
   </div>
-  <div class="col-xs-7" *ngIf="selectedVehicle; else infoText">
-    <app-vehicle-detail [vehicle]="selectedVehicle"></app-vehicle-detail>
+  <div class="col-xs-7">
+    <router-outlet></router-outlet>
   </div>
-  <ng-template #infoText>
-    <h3>Please select a Vehicle</h3>
-  </ng-template>
 </div>

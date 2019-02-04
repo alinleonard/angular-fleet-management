@@ -13,6 +13,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ReminderRenewalListComponent } from './reminder/reminder-renewal-list/reminder-renewal-list.component';
 import { ReminderRenewalItemComponent } from './reminder/reminder-renewal-list/reminder-renewal-item/reminder-renewal-item.component';
 import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.component';
+import { VehicleStartComponent } from './vehicle/vehicle-start/vehicle-start.component';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.
     NotFoundComponent,
     ReminderRenewalListComponent,
     ReminderRenewalItemComponent,
-    VehicleDetailComponent
+    VehicleDetailComponent,
+    VehicleStartComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,

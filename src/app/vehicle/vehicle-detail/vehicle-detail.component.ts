@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Vehicle } from '../vehicle.model';
 import { Reminder } from 'src/app/shared/reminder.module';
 import { ReminderService } from 'src/app/shared/reminder.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { VehicleService } from '../vehicle.service';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -9,7 +11,8 @@ import { ReminderService } from 'src/app/shared/reminder.service';
   styleUrls: ['./vehicle-detail.component.scss']
 })
 export class VehicleDetailComponent implements OnInit {
-  @Input() vehicle: Vehicle;
+  vehicle: Vehicle;
+  id: number;
 
   @ViewChild('reminderInput') reminderInputRef: ElementRef;
   @ViewChild('triggerDateInput') triggerDateInputRef: ElementRef;
@@ -17,14 +20,24 @@ export class VehicleDetailComponent implements OnInit {
 
   reminders: Reminder[];
 
-  constructor(private rService: ReminderService) { }
+  constructor(
+    private rService: ReminderService,
+    private route: ActivatedRoute,
+    private vService: VehicleService,
+    private router: Router) {
+
+  }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+      this.vehicle = this.vService.getVehicle(this.id);
+    });
     this.reminders = this.rService.getReminders();
   }
 
-  onAddReminder() {
-    const triggerReminderDate: Date = new Date(this.triggerDateInputRef.nativeElement.value);
+  onEditVehicle() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
 }

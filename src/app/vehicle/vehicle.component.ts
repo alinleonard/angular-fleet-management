@@ -13,18 +13,12 @@ export class VehicleComponent implements OnInit {
 
   vehicles: Vehicle[];
 
-  selectedVehicle: Vehicle;
-
   constructor(private vService: VehicleService) { }
 
   ngOnInit() {
     this.vehicles = this.vService.getVehicles();
-    this.vService.onVehicleChanged.subscribe((vehicles) => {
+    this.vService.vehicleChanged.subscribe((vehicles) => {
       this.vehicles = vehicles;
-    });
-
-    this.vService.onSelectedVehicle.subscribe((sVehicle) => {
-      this.selectedVehicle = sVehicle;
     });
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Vehicle } from '../vehicle.model';
 import { VehicleService } from '../vehicle.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-edit',
@@ -8,24 +9,26 @@ import { VehicleService } from '../vehicle.service';
   styleUrls: ['./vehicle-edit.component.scss']
 })
 export class VehicleEditComponent implements OnInit {
-  isSelectedVehicle: Boolean = false;
+  id: number;
+  isEdit = false;
 
   @ViewChild('nameInput') nameInputRef: ElementRef;
   @ViewChild('manufacturerInput') manufacturerInputRef: ElementRef;
   @ViewChild('modelInput') modelInputInputRef: ElementRef;
   @ViewChild('yearInput') yearInputRef: ElementRef;
 
-  constructor(private vService: VehicleService) { }
+  constructor(private vService: VehicleService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.vService.onSelectedVehicle.subscribe((vehicle: Vehicle) => {
-      this.isSelectedVehicle = true;
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+      this.isEdit = params['id'] != null;
+      console.log(this.isEdit);
     });
   }
 
   onAddItem() {
     const newVehicle = new Vehicle(
-      0,
       this.nameInputRef.nativeElement.value,
       this.manufacturerInputRef.nativeElement.value,
       this.modelInputInputRef.nativeElement.value,

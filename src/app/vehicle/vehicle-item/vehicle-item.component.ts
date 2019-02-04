@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Vehicle } from '../vehicle.model';
-import { VehicleService } from '../vehicle.service';
 
 @Component({
   selector: 'app-vehicle-item',
@@ -10,13 +9,8 @@ import { VehicleService } from '../vehicle.service';
 export class VehicleItemComponent implements OnInit {
   @Input() vehicle: Vehicle;
 
-  constructor(private vService: VehicleService) { }
+  constructor() { }
 
   ngOnInit() {
   }
-
-  onVehicleSelected() {
-    this.vService.onSelectedVehicle.emit(this.vehicle);
-  }
-
 }

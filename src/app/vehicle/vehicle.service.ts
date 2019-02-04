@@ -3,8 +3,7 @@ import { Vehicle } from './vehicle.model';
 import { Reminder } from '../shared/reminder.module';
 
 export class VehicleService {
-    @Output() onSelectedVehicle = new EventEmitter<Vehicle>();
-    @Output() onVehicleChanged = new EventEmitter<Vehicle[]>();
+    @Output() vehicleChanged = new EventEmitter<Vehicle[]>();
 
     private vehicles: Vehicle[] = [
         {
@@ -30,9 +29,13 @@ export class VehicleService {
         return this.vehicles.slice();
     }
 
+    getVehicle(id: number) {
+        return this.vehicles.find(v => v._id === id);
+    }
+
     addVehicleItem(vehicle: Vehicle) {
         vehicle._id = this.vehicles.length + 1;
         this.vehicles.push(vehicle);
-        this.onVehicleChanged.emit(this.vehicles.slice());
+        this.vehicleChanged.emit(this.vehicles.slice());
     }
 }

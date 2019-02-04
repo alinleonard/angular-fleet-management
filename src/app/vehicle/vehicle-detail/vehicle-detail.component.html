@@ -23,6 +23,18 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
+    <div class="btn-group" appDropdown>
+      <button class="btn btn-primary dropdown-toggle">Manage Vehicle <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li style="cursor: pointer;" (click)="onEditVehicle()">Edit Vehicle</li>
+        <li>Delete Vehicle</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
     <form>
       <label for="reminder">Reminder</label>
       <select #reminderInput name="reminder" class="form-control">
@@ -32,7 +44,7 @@
       <input #triggerDateInput name="trigger" type="date" class="form-control">
       <label class="checkbox checkbox-inline"><input #checkboxInput type="checkbox"> Alert on Email</label>
       <hr>
-      <button (click)="onAddReminder()" class="btn btn-success">Add</button>
+      <button class="btn btn-success">Add</button>
     </form>
   </div>
 </div>
