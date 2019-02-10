@@ -1,14 +1,8 @@
 <div class="row">
-  <div class="col-xs-5">
-    <div class="row">
-      <div class="col-xs-12">
-        <app-vehicle-edit></app-vehicle-edit>
-      </div>
-    </div>
-    <hr>
-    <app-vehicle-item [vehicle]="vehicle" *ngFor="let vehicle of vehicles"></app-vehicle-item>
+  <div class="col-md-5">
+    <app-vehicle-list></app-vehicle-list>
   </div>
-  <div class="col-xs-7">
+  <div class="col-md-7">
     <router-outlet></router-outlet>
   </div>
 </div>

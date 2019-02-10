@@ -6,36 +6,29 @@ export class VehicleService {
     vehicleChanged = new Subject<Vehicle[]>();
 
     private vehicles: Vehicle[] = [
-        {
-            _id: 0,
-            name: 'My Blue Car',
-            manufacturer: 'BMW',
-            model: 'X5',
-            year: 1999,
-            reminders: [
-               {
-                  reminder: new Reminder('Asigurare RCA'),
-                  trigger: {
-                      date: new Date()
-                  },
-                  created: new Date()
-               }
-            ]
-        },
-        { _id: 1, name: 'Wife Car', manufacturer: 'Audi', model: 'A4', year: 2005 }
+        new Vehicle(
+            'My Blue Car',
+            'BMW',
+            'X5',
+            1999),
+        new Vehicle('Wife Car', 'Audi', 'A4', 2005)
     ];
 
     getVehicles() {
         return this.vehicles.slice();
     }
 
-    getVehicle(id: number) {
-        return this.vehicles.find(v => v._id === id);
+    getVehicle(index: number) {
+        return this.vehicles[index];
     }
 
-    addVehicleItem(vehicle: Vehicle) {
-        vehicle._id = this.vehicles.length + 1;
+    addVehicle(vehicle: Vehicle) {
         this.vehicles.push(vehicle);
+        this.vehicleChanged.next(this.vehicles.slice());
+    }
+
+    updateVehicle(index: number, newVehicle: Vehicle) {
+        this.vehicles[index] = newVehicle;
         this.vehicleChanged.next(this.vehicles.slice());
     }
 }

@@ -14,15 +14,6 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let reminder of vehicle.reminders">
-        {{ reminder.reminder.name }}
-      </li>
-    </ul>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
     <div class="btn-group" appDropdown>
       <button class="btn btn-primary dropdown-toggle">Manage Vehicle <span class="caret"></span></button>
       <ul class="dropdown-menu">
@@ -34,17 +25,11 @@
 </div>
 <hr>
 <div class="row">
-  <div class="col-xs-12">
-    <form>
-      <label for="reminder">Reminder</label>
-      <select #reminderInput name="reminder" class="form-control">
-        <option *ngFor="let reminder of reminders" [value]="reminder._id">{{ reminder.name }}</option>
-      </select>
-      <label for="trigger">Expiration date</label>
-      <input #triggerDateInput name="trigger" type="date" class="form-control">
-      <label class="checkbox checkbox-inline"><input #checkboxInput type="checkbox"> Alert on Email</label>
-      <hr>
-      <button class="btn btn-success">Add</button>
-    </form>
-  </div>
+    <div class="col-xs-12">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let reminder of vehicle.reminders">
+          {{ reminder.reminder.name }}
+        </li>
+      </ul>
+    </div>
 </div>

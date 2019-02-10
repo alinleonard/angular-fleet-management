@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewVehicle()">New Vehicle</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-vehicle-item *ngFor="let vehicle of vehicles; let i = index" [vehicle]="vehicle" [index]="i"></app-vehicle-item>
+  </div>
+</div>

@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
-import { VehicleItemComponent } from './vehicle/vehicle-item/vehicle-item.component';
+import { VehicleItemComponent } from './vehicle/vehicle-list/vehicle-item/vehicle-item.component';
 import { VehicleEditComponent } from './vehicle/vehicle-edit/vehicle-edit.component';
 import { ReminderComponent } from './reminder/reminder.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,10 @@ import { ReminderRenewalItemComponent } from './reminder/reminder-renewal-list/r
 import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.component';
 import { VehicleStartComponent } from './vehicle/vehicle-start/vehicle-start.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { VehicleListComponent } from './vehicle/vehicle-list/vehicle-list.component';
+
+import { VehicleService } from 'src/app/vehicle/vehicle.service';
+import { ReminderService } from 'src/app/shared/reminder.service';
 
 @NgModule({
   declarations: [
@@ -29,14 +33,16 @@ import { DropdownDirective } from './shared/dropdown.directive';
     ReminderRenewalItemComponent,
     VehicleDetailComponent,
     VehicleStartComponent,
-    DropdownDirective
+    DropdownDirective,
+    VehicleListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [VehicleService, ReminderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

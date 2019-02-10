@@ -6,15 +6,6 @@ export class Vehicle {
     public manufacturer: string;
     public model: string;
     public year: number;
-    public reminders?: [
-        {
-            reminder: Reminder,
-            trigger: {
-                date?: Date
-            },
-            created: Date
-        }
-    ];
 
     constructor(name: string, manufacturer: string, model: string, year: number) {
         this.name = name;

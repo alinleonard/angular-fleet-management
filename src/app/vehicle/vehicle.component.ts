@@ -3,28 +3,13 @@ import { VehicleService } from './vehicle.service';
 import { Vehicle } from './vehicle.model';
 import { ReminderService } from '../shared/reminder.service';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle',
   templateUrl: './vehicle.component.html',
   styleUrls: ['./vehicle.component.scss'],
-  providers: [VehicleService, ReminderService]
+  providers: []
 })
-export class VehicleComponent implements OnInit, OnDestroy {
-  vehicles: Vehicle[];
-  private subscription: Subscription;
-
-  constructor(private vService: VehicleService) { }
-
-  ngOnInit() {
-    this.vehicles = this.vService.getVehicles();
-    this.subscription = this.vService.vehicleChanged.subscribe((vehicles) => {
-      this.vehicles = vehicles;
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
+export class VehicleComponent {
 }
