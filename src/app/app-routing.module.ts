@@ -9,9 +9,9 @@ import { VehicleStartComponent } from './vehicle/vehicle-start/vehicle-start.com
 import { VehicleEditComponent } from './vehicle/vehicle-edit/vehicle-edit.component';
 
 const appRoutes: Routes = [
-    { path: '', component: VehicleComponent },
+    { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
     {
-        path: 'vehicle',
+        path: 'vehicles',
         component: VehicleComponent,
         children: [
             { path: '', component: VehicleStartComponent },
@@ -20,7 +20,7 @@ const appRoutes: Routes = [
             { path: ':id/edit', component: VehicleEditComponent }
         ]
     },
-    { path: 'reminder', component: ReminderComponent },
+    { path: 'reminders', component: ReminderComponent },
     { path: '**', component: NotFoundComponent }
 ];
 

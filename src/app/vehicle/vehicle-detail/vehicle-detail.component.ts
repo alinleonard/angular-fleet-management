@@ -40,4 +40,9 @@ export class VehicleDetailComponent implements OnInit {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
+  onDeleteVehicle() {
+    this.vService.deleteVehicle(this.id);
+    this.router.navigate(['/vehicles']);
+  }
+
 }

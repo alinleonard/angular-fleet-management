@@ -27,10 +27,28 @@ export class VehicleEditComponent implements OnInit {
     });
   }
 
+  onAddReminder() {
+    (<FormArray>this.vehicleForm.get('reminders')).push(
+      new FormGroup({
+        'reminder': new FormGroup({
+          'name': new FormControl(null)
+        }),
+        'trigger': new FormGroup({
+          'date': new FormControl(this.toDateInput())
+        })
+      })
+    );
+  }
+
+  toDateInput() {
+    const local = new Date();
+    return local.toJSON().slice(0, 10);
+  }
+
   private initForm() {
     let vehicleName = '';
     let vehicleManufacturer = '';
-    let vehicleModel = ''
+    let vehicleModel = '';
     let vehicleYear: number;
     let vehicleReminders = new FormArray([]);
 
@@ -40,6 +58,20 @@ export class VehicleEditComponent implements OnInit {
       vehicleManufacturer = vehicle.manufacturer;
       vehicleModel = vehicle.model;
       vehicleYear = vehicle.year;
+      if (vehicleReminders['reminders']) {
+        for (const reminder of vehicle.reminders) {
+          vehicleReminders.push(
+            new FormGroup({
+              'reminder': new FormGroup({
+                'name': new FormControl(null)
+              }),
+              'trigger': new FormGroup({
+                'date': new FormControl(reminder.trigger.date)
+              })
+            })
+          );
+        }
+      }
     }
 
     this.vehicleForm = new FormGroup({
@@ -55,11 +87,12 @@ export class VehicleEditComponent implements OnInit {
   }
 
   getControls() {
+    console.log((<FormArray>this.vehicleForm.get('reminders')).controls);
     return (<FormArray>this.vehicleForm.get('reminders')).controls;
   }
 
   onSubmit() {
-    if(this.isEdit) {
+    if (this.isEdit) {
       this.vService.updateVehicle(this.id, this.vehicleForm.value);
     } else {
       this.vService.addVehicle(this.vehicleForm.value);

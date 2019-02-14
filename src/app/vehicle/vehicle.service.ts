@@ -31,4 +31,9 @@ export class VehicleService {
         this.vehicles[index] = newVehicle;
         this.vehicleChanged.next(this.vehicles.slice());
     }
+
+    deleteVehicle(index: number) {
+        this.vehicles.splice(index, 1);
+        this.vehicleChanged.next(this.vehicles.slice());
+    }
 }

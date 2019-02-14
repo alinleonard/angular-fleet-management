@@ -1,4 +1,4 @@
-import { Reminder } from '../shared/reminder.module';
+import { VehicleReminder } from './vehicle-reminder.model';
 
 export class Vehicle {
     public _id: number;
@@ -6,6 +6,7 @@ export class Vehicle {
     public manufacturer: string;
     public model: string;
     public year: number;
+    public reminders: VehicleReminder[];
 
     constructor(name: string, manufacturer: string, model: string, year: number) {
         this.name = name;
