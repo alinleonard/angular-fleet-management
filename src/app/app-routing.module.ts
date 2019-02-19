@@ -7,6 +7,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.component';
 import { VehicleStartComponent } from './vehicle/vehicle-start/vehicle-start.component';
 import { VehicleEditComponent } from './vehicle/vehicle-edit/vehicle-edit.component';
+import { ReminderStartComponent } from './reminder/reminder-start/reminder-start.component';
+import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/reminder-renewal-edit.component';
+import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-detail/reminder-renewal-detail.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
@@ -20,7 +23,16 @@ const appRoutes: Routes = [
             { path: ':id/edit', component: VehicleEditComponent }
         ]
     },
-    { path: 'reminders', component: ReminderComponent },
+    {
+        path: 'reminders',
+        component: ReminderComponent,
+        children: [
+            { path: '', component: ReminderStartComponent },
+            { path: 'new', component: ReminderRenewalEditComponent },
+            { path: ':id', component: ReminderRenewalDetailComponent },
+            { path: ':id/edit', component: ReminderRenewalEditComponent },
+        ]
+    },
     { path: '**', component: NotFoundComponent }
 ];
 

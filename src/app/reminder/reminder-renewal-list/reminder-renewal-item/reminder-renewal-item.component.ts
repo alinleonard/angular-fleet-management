@@ -8,9 +8,9 @@ import { Reminder } from '../../../shared/reminder.module';
 })
 export class ReminderRenewalItemComponent implements OnInit {
   @Input() reminder: Reminder;
+  @Input() index: number;
   constructor() { }
 
   ngOnInit() {
   }
-
 }

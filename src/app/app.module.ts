@@ -19,6 +19,9 @@ import { VehicleListComponent } from './vehicle/vehicle-list/vehicle-list.compon
 
 import { VehicleService } from 'src/app/vehicle/vehicle.service';
 import { ReminderService } from 'src/app/shared/reminder.service';
+import { ReminderStartComponent } from './reminder/reminder-start/reminder-start.component';
+import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/reminder-renewal-edit.component';
+import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-detail/reminder-renewal-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { ReminderService } from 'src/app/shared/reminder.service';
     VehicleDetailComponent,
     VehicleStartComponent,
     DropdownDirective,
-    VehicleListComponent
+    VehicleListComponent,
+    ReminderStartComponent,
+    ReminderRenewalEditComponent,
+    ReminderRenewalDetailComponent
   ],
   imports: [
     BrowserModule,
