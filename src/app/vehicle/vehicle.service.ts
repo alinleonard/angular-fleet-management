@@ -1,5 +1,4 @@
 import { Vehicle } from './vehicle.model';
-import { Reminder } from '../shared/reminder.module';
 import { Subject } from 'rxjs';
 
 export class VehicleService {

@@ -22,6 +22,7 @@ import { ReminderService } from 'src/app/shared/reminder.service';
 import { ReminderStartComponent } from './reminder/reminder-start/reminder-start.component';
 import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/reminder-renewal-edit.component';
 import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-detail/reminder-renewal-detail.component';
+import { VehicleReminderComponent } from './vehicle/vehicle-reminder/vehicle-reminder.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-deta
     VehicleListComponent,
     ReminderStartComponent,
     ReminderRenewalEditComponent,
-    ReminderRenewalDetailComponent
+    ReminderRenewalDetailComponent,
+    VehicleReminderComponent
   ],
   imports: [
     BrowserModule,

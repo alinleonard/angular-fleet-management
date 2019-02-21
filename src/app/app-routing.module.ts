@@ -10,6 +10,7 @@ import { VehicleEditComponent } from './vehicle/vehicle-edit/vehicle-edit.compon
 import { ReminderStartComponent } from './reminder/reminder-start/reminder-start.component';
 import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/reminder-renewal-edit.component';
 import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-detail/reminder-renewal-detail.component';
+import { VehicleReminderComponent } from './vehicle/vehicle-reminder/vehicle-reminder.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
             { path: '', component: VehicleStartComponent },
             { path: 'new', component: VehicleEditComponent },
             { path: ':id', component: VehicleDetailComponent },
-            { path: ':id/edit', component: VehicleEditComponent }
+            { path: ':id/edit', component: VehicleEditComponent },
+            { path: ':id/reminder', component: VehicleReminderComponent }
         ]
     },
     {

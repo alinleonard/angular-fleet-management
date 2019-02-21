@@ -40,6 +40,10 @@ export class VehicleDetailComponent implements OnInit {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
+  onReminderVehicle() {
+    this.router.navigate(['reminder'], { relativeTo: this.route });
+  }
+
   onDeleteVehicle() {
     this.vService.deleteVehicle(this.id);
     this.router.navigate(['/vehicles']);

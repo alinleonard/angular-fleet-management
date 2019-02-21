@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-success" style="margin-right: 5px" type="submit">Save</button>
+        <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="reminder">Reminder</label>
+            <select name="reminder" class="form-control" formControlName="reminderId">
+              <option *ngFor="let reminder of reminders; let i = index" [value]="i">{{ reminder.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" name="date" class="form-control" formControlName="date">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <h3>List of Reminders</h3>
+    <div class="list-group-item clearfix" *ngFor="let reminder of vehicle.reminders; let i = index;">
+      <div class="pull-left">
+        {{ reminders[reminder.reminderId].name }}
+      </div>
+      <div class="pull-right">
+        {{ reminder.date }}
+        <span class="glyphicon glyphicon-trash" (click)="onRemoveReminder(i)"></span>
+      </div>
+    </div>
+  </div>
+</div>

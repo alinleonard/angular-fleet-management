@@ -1,4 +1,4 @@
-import { VehicleReminder } from './vehicle-reminder.model';
+import { VehicleReminder } from './vehicle-reminder/vehicle-reminder.model';
 
 export class Vehicle {
     public _id: number;
