@@ -27,10 +27,14 @@
 <hr>
 <div class="row">
     <div class="col-xs-12">
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let reminder of vehicle.reminders">
-          {{ reminder.reminder.name }}
-        </li>
-      </ul>
+      <h4>Reminder List</h4>
+        <div class="list-group-item clearfix" *ngFor="let reminder of vehicle.reminders">
+          <div class="pull-left">
+            {{ reminders[reminder.reminderId].name }}
+          </div>
+          <div class="pull-right">
+            {{ reminder.date }}
+          </div>
+        </div>
     </div>
 </div>

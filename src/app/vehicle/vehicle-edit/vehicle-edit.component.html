@@ -55,32 +55,6 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12" formArrayName="reminders">
-          <div class="row"
-          *ngFor="let reminder of getControls(); let i = index" 
-          style="margin-top: 10px"
-          [formGroupName]="i">
-            <div class="col-xs-5" formGroupName="reminder">
-              <select class="form-control" formControlName="name">
-                <option name="name"></option>
-              </select>
-            </div>
-            <div class="col-xs-5" formGroupName="trigger">
-              <input type="date" name="date" formControlName="date" class="form-control">
-            </div>
-            <div class="col-xs-2">
-              <button class="btn btn-danger">X</button>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-12">
-              <button class="btn btn-success" type="button" (click)="onAddReminder()">Add Reminder</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </form>
   </div>
 </div>

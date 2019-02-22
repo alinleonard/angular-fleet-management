@@ -11,6 +11,7 @@ import { ReminderStartComponent } from './reminder/reminder-start/reminder-start
 import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/reminder-renewal-edit.component';
 import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-detail/reminder-renewal-detail.component';
 import { VehicleReminderComponent } from './vehicle/vehicle-reminder/vehicle-reminder.component';
+import { MapComponent } from './map/map.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
@@ -34,6 +35,10 @@ const appRoutes: Routes = [
             { path: ':id', component: ReminderRenewalDetailComponent },
             { path: ':id/edit', component: ReminderRenewalEditComponent },
         ]
+    },
+    {
+        path: 'map',
+        component: MapComponent
     },
     { path: '**', component: NotFoundComponent }
 ];
