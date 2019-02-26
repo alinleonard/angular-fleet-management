@@ -1,8 +1,48 @@
 <div class="row">
   <div class="col-xs-12">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <button class="btn btn-success" type="submit" style="margin-right: 5px;">Save</button>
-      <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" style="margin-right: 5px;" [disabled]="!form.valid">Save</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="sn">Sn</label>
+            <input type="text" class="form-control" formControlName="sn">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" formControlName="phone">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+              <label for="Vehicle">Assigned to</label>
+              <input type="text" class="form-control" disabled>
+        </div>
+        <div class="col-xs-4">
+              <label for="Vehicle">Vehicles</label>
+              <select class="form-control" #selectedOption>
+                <option *ngFor="let vehicle of vehicles; let i = index" [value]="i">{{ vehicle.name }}</option>
+              </select>
+        </div>
+        <div class="col-xs-4">
+          <label>Action</label>
+          <div class="col-xs-12">
+            <button class="btn btn-success" style="margin-right: 5px" (click)="onSetVehicle()">Set</button>
+            <button class="btn btn-danger" (click)="onClearVehicle()">Clear</button>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </div>
