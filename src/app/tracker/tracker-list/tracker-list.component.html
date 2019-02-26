@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success">New Tracker</button>
+  </div>
+</div>
+<hr>
+<h4>Tracker List</h4>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-tracker-item [tracker]="tracker" *ngFor="let tracker of trackers"></app-tracker-item>
+  </div>
+</div>

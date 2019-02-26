@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h4>SN: {{ tracker.sn }}</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="btn-group" appDropdown>
+      <button class="btn btn-primary dropdown-toggle">Manage Tracker <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li (click)="onEdit()" style="cursor: pointer">Edit</li>
+        <li (click)="onDelete()" style="cursor: pointer">Delete</li>
+      </ul>
+    </div>
+  </div>
+</div>

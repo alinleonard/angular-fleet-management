@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { TrackerService } from '../tracker.service';
-import { Tracker } from '../tracker.model';
+import { TrackerService } from '../../tracker/tracker.service';
+import { Tracker } from '../../tracker/tracker.model';
 import { Vehicle } from 'src/app/vehicle/vehicle.model';
 import { VehicleService } from 'src/app/vehicle/vehicle.service';
 import { Subscription } from 'rxjs';

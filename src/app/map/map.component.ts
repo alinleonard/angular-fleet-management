@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TrackerService } from './tracker.service';
-import { Tracker } from './tracker.model';
+import { TrackerService } from '../tracker/tracker.service';
+import { Tracker } from '../tracker/tracker.model';
 declare let L: any;
 
 @Component({

@@ -1,0 +1,11 @@
+<a [routerLink]="tracker.id" class="list-group-item clearfix" style="cursor: pointer">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">
+      SN: {{ tracker.sn }}
+    </h4>
+    <span class="list-group-item-text">
+      <p><b>Positions:</b>  {{ (tracker.positions) ? tracker.positions.length : '0' }} records</p>
+      <p><b>Last position date:</b> {{ getLastPositionPostedDate() }}</p>
+    </span>
+  </div>
+</a>

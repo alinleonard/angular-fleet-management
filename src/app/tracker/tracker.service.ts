@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 
 export class TrackerService {
     selectedTracker = new Subject<Tracker>();
+    trackerChanged = new Subject<Tracker[]>();
 
     private trackers: Tracker[] = [
         new Tracker(0, '1234', '0770000000'),
@@ -100,5 +101,11 @@ export class TrackerService {
 
     getAssignedTrackers() {
         return this.trackers.filter((tracker) => tracker.vehicleId !== undefined).slice();
+    }
+
+    deleteTracker(id: number) {
+        const index: number = this.trackers.findIndex(s => s.id === id);
+        this.trackers.splice(index, 1);
+        this.trackerChanged.next(this.trackers.slice());
     }
 }

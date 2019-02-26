@@ -24,8 +24,14 @@ import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/r
 import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-detail/reminder-renewal-detail.component';
 import { VehicleReminderComponent } from './vehicle/vehicle-reminder/vehicle-reminder.component';
 import { MapComponent } from './map/map.component';
-import { TrackerService } from './map/tracker.service';
+import { TrackerService } from './tracker/tracker.service';
 import { MapDetailComponent } from './map/map-detail/map-detail.component';
+import { TrackerComponent } from './tracker/tracker.component';
+import { TrackerListComponent } from './tracker/tracker-list/tracker-list.component';
+import { TrackerItemComponent } from './tracker/tracker-list/tracker-item/tracker-item.component';
+import { TrackerDetailComponent } from './tracker/tracker-detail/tracker-detail.component';
+import { TrackerEditComponent } from './tracker/tracker-edit/tracker-edit.component';
+import { TrackerStartComponent } from './tracker/tracker-start/tracker-start.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +53,13 @@ import { MapDetailComponent } from './map/map-detail/map-detail.component';
     ReminderRenewalDetailComponent,
     VehicleReminderComponent,
     MapComponent,
-    MapDetailComponent
+    MapDetailComponent,
+    TrackerComponent,
+    TrackerListComponent,
+    TrackerItemComponent,
+    TrackerDetailComponent,
+    TrackerEditComponent,
+    TrackerStartComponent
   ],
   imports: [
     BrowserModule,

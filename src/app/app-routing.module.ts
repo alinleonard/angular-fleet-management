@@ -12,6 +12,10 @@ import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/r
 import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-detail/reminder-renewal-detail.component';
 import { VehicleReminderComponent } from './vehicle/vehicle-reminder/vehicle-reminder.component';
 import { MapComponent } from './map/map.component';
+import { TrackerComponent } from './tracker/tracker.component';
+import { TrackerStartComponent } from './tracker/tracker-start/tracker-start.component';
+import { TrackerEditComponent } from './tracker/tracker-edit/tracker-edit.component';
+import { TrackerDetailComponent } from './tracker/tracker-detail/tracker-detail.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
@@ -34,6 +38,16 @@ const appRoutes: Routes = [
             { path: 'new', component: ReminderRenewalEditComponent },
             { path: ':id', component: ReminderRenewalDetailComponent },
             { path: ':id/edit', component: ReminderRenewalEditComponent },
+        ]
+    },
+    {
+        path: 'trackers',
+        component: TrackerComponent,
+        children: [
+            { path: '',  component: TrackerStartComponent },
+            { path: 'new',  component: TrackerEditComponent },
+            { path: ':id',  component: TrackerDetailComponent },
+            { path: ':id/edit',  component: TrackerEditComponent }
         ]
     },
     {
