@@ -20,6 +20,7 @@ export class MapComponent implements OnInit, OnDestroy {
   constructor(private tService: TrackerService) { }
 
   ngOnInit() {
+    L.Icon.Default.imagePath = './assets/leaflet/images/';
     this.map = L.map('map').setView([51.505, -0.09], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {
