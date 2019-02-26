@@ -24,8 +24,8 @@ import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/r
 import { ReminderRenewalDetailComponent } from './reminder/reminder-renewal-detail/reminder-renewal-detail.component';
 import { VehicleReminderComponent } from './vehicle/vehicle-reminder/vehicle-reminder.component';
 import { MapComponent } from './map/map.component';
-import { EchoService } from './map/echo.service';
 import { TrackerService } from './map/tracker.service';
+import { MapDetailComponent } from './map/map-detail/map-detail.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import { TrackerService } from './map/tracker.service';
     ReminderRenewalEditComponent,
     ReminderRenewalDetailComponent,
     VehicleReminderComponent,
-    MapComponent
+    MapComponent,
+    MapDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +55,7 @@ import { TrackerService } from './map/tracker.service';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [VehicleService, ReminderService, EchoService, TrackerService],
+  providers: [VehicleService, ReminderService, TrackerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,31 @@
+<div class="row" *ngIf="!tracker">
+  <div class="col-md-12">
+    <h4>Please select a tracker or vehicle!</h4>
+  </div>
+</div>
+<div class="row" *ngIf="tracker">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-xs-6">
+        <h3>Vehicle details</h3>
+        <div class="row" *ngIf="isAssigned">
+          <div class="col-xs-12">
+            <p>Name: {{vehicle.name}}</p>
+            <P>{{ vehicle.manufacturer }} - {{ vehicle.model }}</P>
+            <p>Year: {{ vehicle.year }}</p>
+          </div>
+        </div>
+        <p [hidden]="isAssigned">No vehicle is assigned to the tracker!</p>
+      </div>
+      <div class="col-xs-6">
+        <h3>Tracker details</h3>
+        <div class="row">
+          <div class="col-xs-12">
+            <p>SN: {{ tracker.sn }}</p>
+            <p>Phone: {{ tracker.phone }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

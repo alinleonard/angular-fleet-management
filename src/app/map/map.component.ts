@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { EchoService } from './echo.service';
-import { Echo } from './echo.model';
 import { Subscription } from 'rxjs';
 import { TrackerService } from './tracker.service';
 import { Tracker } from './tracker.model';
@@ -14,13 +12,12 @@ declare let L: any;
 export class MapComponent implements OnInit, OnDestroy {
   private map: any;
   private mapLayer: any;
-  private echos: Echo[];
   private subscription: Subscription;
 
   unassignedTrackers: Tracker[];
   assignedTrackers: Tracker[];
 
-  constructor(private eService: EchoService, private tService: TrackerService) { }
+  constructor(private tService: TrackerService) { }
 
   ngOnInit() {
     this.map = L.map('map').setView([51.505, -0.09], 13);
@@ -30,11 +27,8 @@ export class MapComponent implements OnInit, OnDestroy {
       }
     ).addTo(this.map);
 
-    this.echos = this.eService.getEchosByTrackerId(0);
-
-    this.subscription = this.eService.echoChanged.subscribe((echos) => {
-      this.echos = echos;
-      this.renderOnMap();
+    this.subscription = this.tService.selectedTracker.subscribe((tracker) => {
+      this.renderOnMap(tracker);
     });
 
     this.unassignedTrackers = this.tService.getUnassinedTrackers();
@@ -42,14 +36,18 @@ export class MapComponent implements OnInit, OnDestroy {
 
   }
 
-  renderOnMap() {
+  renderOnMap(tracker: Tracker) {
     if (this.mapLayer !== undefined) {
       this.mapLayer.clearLayers();
     }
 
+    if (tracker.positions === undefined) {
+      return true;
+    }
+
     this.mapLayer = L.geoJSON().addTo(this.map);
 
-    for (const echo of this.echos) {
+    for (const echo of tracker.positions) {
       const feature = {
         type: 'Feature',
         properties: {
@@ -59,20 +57,20 @@ export class MapComponent implements OnInit, OnDestroy {
         },
         geometry: {
           type: 'Point',
-          coordinates: [echo.position.lon, echo.position.lat]
+          coordinates: [echo.lon, echo.lat]
         }
       };
       this.mapLayer
         .bindPopup(`
           <b>Car<b>
-          <div>Speed: ${echo.position.speed} km/h</div>
-          <div>Date: ${echo.position.date_posted}</div>
+          <div>Speed: ${echo.speed} km/h</div>
+          <div>Date: ${echo.date_posted}</div>
         `)
         .addData(feature);
     }
 
-    const lnglats = this.echos.map((obj) => {
-      return [obj.position.lon, obj.position.lat];
+    const lnglats = tracker.positions.map((obj) => {
+      return [obj.lon, obj.lat];
     });
     const paths = [{
         'type': 'LineString',
@@ -88,7 +86,8 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   onTrackerSelect(id: number) {
-    this.eService.echoChanged.next(this.eService.getEchosByTrackerId(id));
+    const tracker = this.tService.getTracker(id);
+    this.tService.selectedTracker.next(tracker);
   }
 
   ngOnDestroy() {
