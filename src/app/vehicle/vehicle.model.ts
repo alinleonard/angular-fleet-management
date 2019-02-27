@@ -8,7 +8,8 @@ export class Vehicle {
     public year: number;
     public reminders: VehicleReminder[];
 
-    constructor(name: string, manufacturer: string, model: string, year: number) {
+    constructor(id: number, name: string, manufacturer: string, model: string, year: number) {
+        this._id = id;
         this.name = name;
         this.manufacturer = manufacturer;
         this.model = model;

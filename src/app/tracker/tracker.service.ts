@@ -96,11 +96,19 @@ export class TrackerService {
     }
 
     getUnassinedTrackers() {
-        return this.trackers.filter((tracker) => tracker.vehicleId === undefined).slice();
+        return this.trackers.filter((tracker) => tracker.vehicleId === undefined || tracker.vehicleId === null).slice();
     }
 
     getAssignedTrackers() {
-        return this.trackers.filter((tracker) => tracker.vehicleId !== undefined).slice();
+        return this.trackers.filter((tracker) => tracker.vehicleId !== undefined && tracker.vehicleId !== null).slice();
+    }
+
+    addTracker(tracker: Tracker) {
+        /**@todo Id increment should be deleted in production on real database */
+        const id = this.trackers[this.trackers.length - 1].id;
+        tracker.id = id + 1;
+        this.trackers.push(tracker);
+        this.trackerChanged.next(this.trackers.slice());
     }
 
     deleteTracker(id: number) {

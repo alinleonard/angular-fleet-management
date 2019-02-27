@@ -6,11 +6,12 @@ export class VehicleService {
 
     private vehicles: Vehicle[] = [
         new Vehicle(
+            0,
             'My Blue Car',
             'BMW',
             'X5',
             1999),
-        new Vehicle('Wife Car', 'Audi', 'A4', 2005)
+        new Vehicle(1, 'Wife Car', 'Audi', 'A4', 2005)
     ];
 
     getVehicles() {

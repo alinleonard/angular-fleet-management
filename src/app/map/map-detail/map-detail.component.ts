@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TrackerService } from '../../tracker/tracker.service';
 import { Tracker } from '../../tracker/tracker.model';
 import { Vehicle } from 'src/app/vehicle/vehicle.model';
@@ -22,7 +22,7 @@ export class MapDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.trackerService.selectedTracker.subscribe((tracker: Tracker) => {
       this.tracker = tracker;
-      this.isAssigned = this.tracker.vehicleId !== undefined;
+      this.isAssigned = this.tracker.vehicleId !== undefined && this.tracker.vehicleId !== null;
 
       if (this.isAssigned) {
         this.vehicle = this.vehicleService.getVehicle(this.tracker.vehicleId);
