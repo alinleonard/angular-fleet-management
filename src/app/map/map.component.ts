@@ -68,6 +68,7 @@ export class MapComponent implements OnInit, OnDestroy {
           <div>Date: ${echo.date_posted}</div>
         `)
         .addData(feature);
+        console.log(echo.speed);
     }
 
     const lnglats = tracker.positions.map((obj) => {
@@ -77,13 +78,35 @@ export class MapComponent implements OnInit, OnDestroy {
         'type': 'LineString',
         'coordinates': lnglats
     }];
-    const myStyle = {
-      'color': '#ff7800',
-      'weight': 5,
-      'opacity': 0.65
-  };
-    this.mapLayer.addData(paths).setStyle(myStyle);
+
+  L.geoJSON(paths, {
+    onEachFeature: function(feature, layer) {
+      layer.setText('\u25BA    ',
+        {
+          repeat: true,
+          offset: 6,
+          attributes: {
+            fill: 'red',
+            'font-size': '20'
+          }
+        });
+    },
+    style: {
+      'color': 'black',
+      'weight': 2,
+      'opacity': 1
+    }
+  }).addTo(this.map);
     this.map.fitBounds(this.mapLayer.getBounds());
+  }
+
+  pathDirection() {
+    const arrows = L.icon({
+      iconURL: 'https://www.freeiconspng.com/uploads/blue-right-arrow-icon-23.png',
+
+      iconSize: [15, 15],
+      iconAnchor: [0, 0]
+    });
   }
 
   onTrackerSelect(id: number) {

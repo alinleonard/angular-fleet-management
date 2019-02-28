@@ -32,7 +32,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/leaflet/leaflet.js"
+              "src/assets/leaflet/leaflet.js",
+              "src/assets/leaflet.textpath/leaflet.textpath.js"
             ]
           },
           "configurations": {
