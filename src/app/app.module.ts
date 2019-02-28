@@ -32,6 +32,9 @@ import { TrackerItemComponent } from './tracker/tracker-list/tracker-item/tracke
 import { TrackerDetailComponent } from './tracker/tracker-detail/tracker-detail.component';
 import { TrackerEditComponent } from './tracker/tracker-edit/tracker-edit.component';
 import { TrackerStartComponent } from './tracker/tracker-start/tracker-start.component';
+import { VehicleFuelComponent } from './vehicle/vehicle-fuel/vehicle-fuel.component';
+import { VehicleFuelEditComponent } from './vehicle/vehicle-fuel/vehicle-fuel-edit/vehicle-fuel-edit.component';
+import { VehicleFuelDetailComponent } from './vehicle/vehicle-fuel/vehicle-fuel-detail/vehicle-fuel-detail.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { TrackerStartComponent } from './tracker/tracker-start/tracker-start.com
     TrackerItemComponent,
     TrackerDetailComponent,
     TrackerEditComponent,
-    TrackerStartComponent
+    TrackerStartComponent,
+    VehicleFuelComponent,
+    VehicleFuelEditComponent,
+    VehicleFuelDetailComponent
   ],
   imports: [
     BrowserModule,

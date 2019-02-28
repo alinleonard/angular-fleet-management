@@ -1,4 +1,5 @@
 import { VehicleReminder } from './vehicle-reminder/vehicle-reminder.model';
+import { VehicleFuel } from './vehicle-fuel/vehicle-fuel.model';
 
 export class Vehicle {
     public _id: number;
@@ -7,6 +8,7 @@ export class Vehicle {
     public model: string;
     public year: number;
     public reminders: VehicleReminder[];
+    public fuel: VehicleFuel[];
 
     constructor(id: number, name: string, manufacturer: string, model: string, year: number) {
         this._id = id;

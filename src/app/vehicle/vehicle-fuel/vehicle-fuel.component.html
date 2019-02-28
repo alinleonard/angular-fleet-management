@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-success" style="margin-right: 5px" (click)="onAddFuelEntry()">Add Fuel Entry</button>
+        <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-4">
+        <p>Avg. Fuel Cost/Km</p>
+        <h4>0.0 RON</h4>
+      </div>
+      <div class="col-xs-4">
+        <p>Total Liters</p>
+        <h4>{{ getTotalLiters() }}</h4>
+      </div>
+      <div class="col-xs-4">
+        <p>Total Fuel Cost</p>
+        <h4>{{getTotalFuelCost()}} RON</h4>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Odometer</th>
+              <th>Liters</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fuelEntry of fuel">
+              <td>{{ fuelEntry.date }}</td>
+              <td>{{ fuelEntry.odometer }} Km</td>
+              <td>{{ fuelEntry.liters }} L</td>
+              <td>{{ fuelEntry.liters * fuelEntry.pricePerLiter }} RON</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

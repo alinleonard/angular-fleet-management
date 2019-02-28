@@ -16,6 +16,9 @@ import { TrackerComponent } from './tracker/tracker.component';
 import { TrackerStartComponent } from './tracker/tracker-start/tracker-start.component';
 import { TrackerEditComponent } from './tracker/tracker-edit/tracker-edit.component';
 import { TrackerDetailComponent } from './tracker/tracker-detail/tracker-detail.component';
+import { VehicleFuelComponent } from './vehicle/vehicle-fuel/vehicle-fuel.component';
+import { VehicleFuelDetailComponent } from './vehicle/vehicle-fuel/vehicle-fuel-detail/vehicle-fuel-detail.component';
+import { VehicleFuelEditComponent } from './vehicle/vehicle-fuel/vehicle-fuel-edit/vehicle-fuel-edit.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
@@ -27,7 +30,11 @@ const appRoutes: Routes = [
             { path: 'new', component: VehicleEditComponent },
             { path: ':id', component: VehicleDetailComponent },
             { path: ':id/edit', component: VehicleEditComponent },
-            { path: ':id/reminder', component: VehicleReminderComponent }
+            { path: ':id/reminder', component: VehicleReminderComponent },
+            { path: ':id/fuel', component: VehicleFuelComponent },
+            { path: ':id/fuel/new', component: VehicleFuelEditComponent },
+            { path: ':id/fuel/:entry', component: VehicleFuelDetailComponent },
+            { path: ':id/fuel/:entry/edit', component: VehicleFuelEditComponent }
         ]
     },
     {

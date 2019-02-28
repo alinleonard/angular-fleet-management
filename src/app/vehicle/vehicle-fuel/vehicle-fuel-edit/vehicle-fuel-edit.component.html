@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" style="margin-right: 5px;" [disabled]="!form.valid">Save</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="price">Price / Liter (RON)</label>
+            <input type="number" class="form-control" formControlName="pricePerLiter">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="liters">Liters</label>
+            <input type="number" class="form-control" formControlName="liters">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="odometer">Odometer (Km)</label>
+            <input type="number" class="form-control" formControlName="odometer">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="fuelType">Fuel Type</label>
+            <select class="form-control" formControlName="fuelType">
+              <option value="Motorina">Motorina</option>
+              <option value="Benzina">Benzina</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="date">Date / Time</label>
+            <input type="date" class="form-control" formControlName="date">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
