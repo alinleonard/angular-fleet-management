@@ -13,6 +13,8 @@ export class Tracker {
         date_posted: Date;
     }[];
 
+    public type?: string;
+
     constructor(id: number, sn: string, phone: string) {
         this.id = id;
         this.sn = sn;

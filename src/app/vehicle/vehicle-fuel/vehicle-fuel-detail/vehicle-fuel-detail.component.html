@@ -1,3 +1,21 @@
-<p>
-  vehicle-fuel-detail works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-6">
+    <ul class="list-group">
+      <li class="list-group-item"><small>Date</small> {{ fuelEntry.date }}</li>
+      <li class="list-group-item"><small>Odometer</small> {{ fuelEntry.odometer }} Km</li>
+      <li class="list-group-item"><small>Liters</small> {{ fuelEntry.liters }} L</li>
+      <li class="list-group-item"><small>Price / L</small> {{ fuelEntry.pricePerLiter }} RON</li>
+      <li class="list-group-item"><small>Total</small> {{ fuelEntry.pricePerLiter * fuelEntry.liters }} RON</li>
+      <li class="list-group-item"><small>Fuel Type</small> {{ fuelEntry.fuelType }}</li>
+    </ul>
+  </div>
+  <div class="col-xs-6">
+    <div id="map"></div>
+  </div>
+</div>

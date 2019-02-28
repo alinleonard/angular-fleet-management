@@ -34,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let fuelEntry of fuel">
+            <tr *ngFor="let fuelEntry of fuel; let i = index" [routerLink]="[i]" style="cursor: pointer;">
               <td>{{ fuelEntry.date }}</td>
               <td>{{ fuelEntry.odometer }} Km</td>
               <td>{{ fuelEntry.liters }} L</td>

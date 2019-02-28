@@ -48,7 +48,7 @@ export class MapComponent implements OnInit, OnDestroy {
       return true;
     }
 
-    this.markerLayer = L.geoJSON().addTo(this.map);
+    const features = [];
 
     for (const echo of tracker.positions) {
       const feature = {
@@ -56,23 +56,29 @@ export class MapComponent implements OnInit, OnDestroy {
         properties: {
           name: 'name',
           amenity: 'amenity',
-          popupContent: 'popup content'
+          popupContent: 'popup content',
+          speed: echo.speed,
+          date_posted: echo.date_posted
         },
         geometry: {
           type: 'Point',
           coordinates: [echo.lon, echo.lat]
         }
       };
-      this.markerLayer
-        .bindPopup(
+      features.push(feature);
+    }
+
+    this.markerLayer = L.geoJSON(features, {
+      onEachFeature(feature, layer) {
+        layer.bindPopup(
           `
           <b>Car<b>
-          <div>Speed: ${echo.speed} km/h</div>
-          <div>Date: ${echo.date_posted}</div>
+          <div>Speed: ${feature.properties.speed} km/h</div>
+          <div>Date: ${feature.properties.date_posted}</div>
         `
-        )
-        .addData(feature);
-    }
+        );
+      }
+    }).addTo(this.map);
 
     const lnglats = tracker.positions.map(obj => {
       return [obj.lon, obj.lat];
