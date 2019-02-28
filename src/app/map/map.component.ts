@@ -11,42 +11,44 @@ declare let L: any;
 })
 export class MapComponent implements OnInit, OnDestroy {
   private map: any;
-  private mapLayer: any;
+  private markerLayer: any;
+  private polylineLayer: any;
   private subscription: Subscription;
 
   unassignedTrackers: Tracker[];
   assignedTrackers: Tracker[];
 
-  constructor(private tService: TrackerService) { }
+  constructor(private tService: TrackerService) {}
 
   ngOnInit() {
     L.Icon.Default.imagePath = './assets/leaflet/images/';
     this.map = L.map('map').setView([51.505, -0.09], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }
-    ).addTo(this.map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
 
-    this.subscription = this.tService.selectedTracker.subscribe((tracker) => {
+    this.subscription = this.tService.selectedTracker.subscribe(tracker => {
       this.renderOnMap(tracker);
     });
 
     this.unassignedTrackers = this.tService.getUnassinedTrackers();
     this.assignedTrackers = this.tService.getAssignedTrackers();
-
   }
 
   renderOnMap(tracker: Tracker) {
-    if (this.mapLayer !== undefined) {
-      this.mapLayer.clearLayers();
+    if (this.markerLayer !== undefined) {
+      this.markerLayer.clearLayers();
+    }
+    if (this.polylineLayer !== undefined) {
+      this.polylineLayer.clearLayers();
     }
 
     if (tracker.positions === undefined) {
       return true;
     }
 
-    this.mapLayer = L.geoJSON().addTo(this.map);
+    this.markerLayer = L.geoJSON().addTo(this.map);
 
     for (const echo of tracker.positions) {
       const feature = {
@@ -61,28 +63,30 @@ export class MapComponent implements OnInit, OnDestroy {
           coordinates: [echo.lon, echo.lat]
         }
       };
-      this.mapLayer
-        .bindPopup(`
+      this.markerLayer
+        .bindPopup(
+          `
           <b>Car<b>
           <div>Speed: ${echo.speed} km/h</div>
           <div>Date: ${echo.date_posted}</div>
-        `)
+        `
+        )
         .addData(feature);
-        console.log(echo.speed);
     }
 
-    const lnglats = tracker.positions.map((obj) => {
+    const lnglats = tracker.positions.map(obj => {
       return [obj.lon, obj.lat];
     });
-    const paths = [{
-        'type': 'LineString',
-        'coordinates': lnglats
-    }];
+    const paths = [
+      {
+        type: 'LineString',
+        coordinates: lnglats
+      }
+    ];
 
-  L.geoJSON(paths, {
-    onEachFeature: function(feature, layer) {
-      layer.setText('\u25BA    ',
-        {
+    this.polylineLayer = L.geoJSON(paths, {
+      onEachFeature: function(feature, layer) {
+        layer.setText('\u25BA    ', {
           repeat: true,
           offset: 6,
           attributes: {
@@ -90,14 +94,14 @@ export class MapComponent implements OnInit, OnDestroy {
             'font-size': '20'
           }
         });
-    },
-    style: {
-      'color': 'black',
-      'weight': 2,
-      'opacity': 1
-    }
-  }).addTo(this.map);
-    this.map.fitBounds(this.mapLayer.getBounds());
+      },
+      style: {
+        color: 'black',
+        weight: 2,
+        opacity: 1
+      }
+    }).addTo(this.map);
+    this.map.fitBounds(this.markerLayer.getBounds());
   }
 
   onTrackerSelect(id: number) {
@@ -108,5 +112,4 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }
