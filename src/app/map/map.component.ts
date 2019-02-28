@@ -100,15 +100,6 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.fitBounds(this.mapLayer.getBounds());
   }
 
-  pathDirection() {
-    const arrows = L.icon({
-      iconURL: 'https://www.freeiconspng.com/uploads/blue-right-arrow-icon-23.png',
-
-      iconSize: [15, 15],
-      iconAnchor: [0, 0]
-    });
-  }
-
   onTrackerSelect(id: number) {
     const tracker = this.tService.getTracker(id);
     this.tService.selectedTracker.next(tracker);
