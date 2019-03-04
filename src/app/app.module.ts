@@ -35,6 +35,10 @@ import { TrackerStartComponent } from './tracker/tracker-start/tracker-start.com
 import { VehicleFuelComponent } from './vehicle/vehicle-fuel/vehicle-fuel.component';
 import { VehicleFuelEditComponent } from './vehicle/vehicle-fuel/vehicle-fuel-edit/vehicle-fuel-edit.component';
 import { VehicleFuelDetailComponent } from './vehicle/vehicle-fuel/vehicle-fuel-detail/vehicle-fuel-detail.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,9 @@ import { VehicleFuelDetailComponent } from './vehicle/vehicle-fuel/vehicle-fuel-
     TrackerStartComponent,
     VehicleFuelComponent,
     VehicleFuelEditComponent,
-    VehicleFuelDetailComponent
+    VehicleFuelDetailComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +79,7 @@ import { VehicleFuelDetailComponent } from './vehicle/vehicle-fuel/vehicle-fuel-
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [VehicleService, ReminderService, TrackerService],
+  providers: [VehicleService, ReminderService, TrackerService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

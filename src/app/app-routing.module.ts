@@ -19,12 +19,16 @@ import { TrackerDetailComponent } from './tracker/tracker-detail/tracker-detail.
 import { VehicleFuelComponent } from './vehicle/vehicle-fuel/vehicle-fuel.component';
 import { VehicleFuelDetailComponent } from './vehicle/vehicle-fuel/vehicle-fuel-detail/vehicle-fuel-detail.component';
 import { VehicleFuelEditComponent } from './vehicle/vehicle-fuel/vehicle-fuel-edit/vehicle-fuel-edit.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthGuard } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
     {
         path: 'vehicles',
         component: VehicleComponent,
+        canActivate: [AuthGuard],
         children: [
             { path: '', component: VehicleStartComponent },
             { path: 'new', component: VehicleEditComponent },
@@ -40,6 +44,7 @@ const appRoutes: Routes = [
     {
         path: 'reminders',
         component: ReminderComponent,
+        canActivate: [AuthGuard],
         children: [
             { path: '', component: ReminderStartComponent },
             { path: 'new', component: ReminderRenewalEditComponent },
@@ -50,6 +55,7 @@ const appRoutes: Routes = [
     {
         path: 'trackers',
         component: TrackerComponent,
+        canActivate: [AuthGuard],
         children: [
             { path: '',  component: TrackerStartComponent },
             { path: 'new',  component: TrackerEditComponent },
@@ -59,7 +65,16 @@ const appRoutes: Routes = [
     },
     {
         path: 'map',
+        canActivate: [AuthGuard],
         component: MapComponent
+    },
+    {
+        path: 'signup',
+        component: SignupComponent
+    },
+    {
+        path: 'signin',
+        component: SigninComponent
     },
     { path: '**', component: NotFoundComponent }
 ];
