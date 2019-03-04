@@ -28,7 +28,7 @@ const appRoutes: Routes = [
     {
         path: 'vehicles',
         component: VehicleComponent,
-        canActivate: [AuthGuard],
+        canActivate: [],
         children: [
             { path: '', component: VehicleStartComponent },
             { path: 'new', component: VehicleEditComponent },
