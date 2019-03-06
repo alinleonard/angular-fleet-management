@@ -14,17 +14,20 @@ export class VehicleListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    private vService: VehicleService,
+    private vehicleService: VehicleService,
     private router: Router,
     private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    this.subscription = this.vService.vehicleChanged.subscribe((vehicles: Vehicle[]) => {
+    this.subscription = this.vehicleService.vehicleChanged.subscribe((vehicles: Vehicle[]) => {
       this.vehicles = vehicles;
     });
-    this.vehicles = this.vService.getVehicles();
+
+    this.vehicleService.getVehicles().subscribe((vehicles: Vehicle[]) => {
+      this.vehicles = vehicles;
+    });
   }
 
   onNewVehicle() {

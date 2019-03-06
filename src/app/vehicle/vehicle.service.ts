@@ -1,14 +1,16 @@
 import { Vehicle } from './vehicle.model';
-import { Subject } from 'rxjs';
+import { Subject, throwError } from 'rxjs';
 import { Http, Response } from '@angular/http';
 import { AuthService } from '../auth/auth.service';
 import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class VehicleService {
     private vehicles: Vehicle[] = [];
     vehicleChanged = new Subject<Vehicle[]>();
 
-    private baseApiUrl = 'url/vehicles.json';
+    private baseApiUrl = 'https://fleet-management-api.firebaseio.com/vehicles.json';
 
     constructor(private http: Http, private authService: AuthService) { }
 
@@ -41,8 +43,27 @@ export class VehicleService {
     }
 
     getVehicles() {
-        this.fetchVehiclesFromDatabase();
-        return this.vehicles.slice();
+        const token = this.authService.getToken();
+        return this.http.get(this.baseApiUrl + '?auth=' + token)
+            .pipe(map(
+                (response: Response) => {
+                    const vehicles: Vehicle[] = response.json();
+                    for (const vehicle of vehicles) {
+                        if (!vehicle['reminders']) {
+                            vehicle['reminders'] = [];
+                        }
+                        if (!vehicle['fuel']) {
+                            vehicle['fuel'] = [];
+                        }
+                    }
+                    this.setVehicles(vehicles);
+                    return vehicles;
+                }
+            ));
+    }
+
+    setVehicles(vehicles: Vehicle[]) {
+        this.vehicles = vehicles;
     }
 
     getVehicle(index: number) {
@@ -50,8 +71,15 @@ export class VehicleService {
     }
 
     addVehicle(vehicle: Vehicle) {
-        this.vehicles.push(vehicle);
-        this.vehicleChanged.next(this.vehicles.slice());
+        const token = this.authService.getToken();
+        const tempVehicles: Vehicle[] = [vehicle];
+        this.http.put(this.baseApiUrl + '?auth=' + token, tempVehicles).subscribe((res) => {
+            console.log(res);
+            this.vehicles.push(vehicle);
+            this.vehicleChanged.next(this.vehicles.slice());
+        }, (error) => {
+            console.log(error);
+        });
     }
 
     updateVehicle(index: number, newVehicle: Vehicle) {

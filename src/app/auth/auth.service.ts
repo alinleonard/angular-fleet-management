@@ -1,4 +1,6 @@
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
@@ -28,7 +30,7 @@ export class AuthService {
     }
 
     signinUser(email: string, password: string) {
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        return firebase.auth().signInWithEmailAndPassword(email, password)
             .then(
                 (response) => {
                     this.router.navigate(['/']);
@@ -39,9 +41,6 @@ export class AuthService {
                             }
                         );
                 }
-            )
-            .catch(
-                error => console.log(error)
             );
     }
 
@@ -61,11 +60,29 @@ export class AuthService {
                 (token: string) => {
                     this.token = token;
                 }
-            );
+            ).catch(error => {
+                console.log(error);
+            });
         return this.token;
     }
 
     isAuthenticated() {
         return this.token != null;
     }
+
+    checkForStoredAuth() {
+        console.log('check');
+        firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+            user.getIdToken().then(
+              (token: string) => {
+                this.router.navigate(['/']);
+                this.token = token;
+              }
+            );
+          } else {
+            this.token = null;
+          }
+        });
+      }
 }

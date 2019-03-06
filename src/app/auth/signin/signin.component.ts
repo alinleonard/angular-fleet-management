@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
+  errorMessage: String = '';
 
   constructor(private authService: AuthService) { }
 
@@ -18,7 +19,10 @@ export class SigninComponent implements OnInit {
     const email: string = form.value.email;
     const password: string = form.value.password;
 
-    this.authService.signinUser(email, password);
+    this.authService.signinUser(email, password).catch((error) => {
+      console.log(error);
+      this.errorMessage = error.message;
+    });
   }
 
 }

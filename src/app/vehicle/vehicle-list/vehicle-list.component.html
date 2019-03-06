@@ -5,6 +5,9 @@
 </div>
 <hr>
 <div class="row">
+  <!-- <div class="col-xs-12" *ngIf="!vehicles">
+    <p>None</p>
+  </div> -->
   <div class="col-xs-12">
     <app-vehicle-item *ngFor="let vehicle of vehicles; let i = index" [vehicle]="vehicle" [index]="i"></app-vehicle-item>
   </div>
