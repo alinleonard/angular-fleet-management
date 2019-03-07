@@ -29,7 +29,9 @@ export class VehicleReminderComponent implements OnInit {
       this.vehicle = this.vService.getVehicle(this.index);
     });
 
-    this.reminders = this.rService.getReminders();
+    this.rService.getReminders().subscribe((reminders: Reminder[]) => {
+      this.reminders = reminders;
+    });
 
     this.form = new FormGroup({
       reminderId: new FormControl(0),

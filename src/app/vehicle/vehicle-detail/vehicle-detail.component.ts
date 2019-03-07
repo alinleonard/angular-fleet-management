@@ -1,16 +1,18 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Vehicle } from '../vehicle.model';
 import { Reminder } from 'src/app/shared/reminder.module';
 import { ReminderService } from 'src/app/shared/reminder.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { VehicleService } from '../vehicle.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-detail',
   templateUrl: './vehicle-detail.component.html',
   styleUrls: ['./vehicle-detail.component.scss']
 })
-export class VehicleDetailComponent implements OnInit {
+export class VehicleDetailComponent implements OnInit, OnDestroy {
+  subscription: Subscription;
   vehicle: Vehicle;
   id: number;
 
@@ -33,7 +35,14 @@ export class VehicleDetailComponent implements OnInit {
       this.id = +params['id'];
       this.vehicle = this.vService.getVehicle(this.id);
     });
-    this.reminders = this.rService.getReminders();
+
+    this.rService.getReminders().subscribe((reminders: Reminder[]) => {
+      this.reminders = reminders;
+    });
+
+    this.subscription = this.vService.vehicleChanged.subscribe((vehicles: Vehicle[]) => {
+      this.vehicle = vehicles[this.id];
+    });
   }
 
   onEditVehicle() {
@@ -51,6 +60,10 @@ export class VehicleDetailComponent implements OnInit {
   onDeleteVehicle() {
     this.vService.deleteVehicle(this.id);
     this.router.navigate(['/vehicles']);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

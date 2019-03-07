@@ -10,13 +10,13 @@ export class VehicleService {
     private vehicles: Vehicle[] = [];
     vehicleChanged = new Subject<Vehicle[]>();
 
-    private baseApiUrl = 'https://fleet-management-api.firebaseio.com/vehicles.json';
+    private baseApiUrl = 'https://fleet-management-api.firebaseio.com';
 
     constructor(private http: Http, private authService: AuthService) { }
 
     getVehicles() {
         const token = this.authService.getToken();
-        return this.http.get(this.baseApiUrl + '?auth=' + token)
+        return this.http.get(this.baseApiUrl + '/vehicles.json?auth=' + token)
             .pipe(map(
                 (response: Response) => {
                     let vehicles: Vehicle[] = response.json();
@@ -49,7 +49,7 @@ export class VehicleService {
     addVehicle(vehicle: Vehicle) {
         const token = this.authService.getToken();
         const tempVehicles: Vehicle[] = [vehicle];
-        this.http.put(this.baseApiUrl + '?auth=' + token, tempVehicles).subscribe((res) => {
+        this.http.put(this.baseApiUrl + '/vehicles.json?auth=' + token, tempVehicles).subscribe((res) => {
             console.log(res);
             this.vehicles.push(vehicle);
             this.vehicleChanged.next(this.vehicles.slice());
@@ -59,13 +59,19 @@ export class VehicleService {
     }
 
     updateVehicle(index: number, newVehicle: Vehicle) {
-        this.vehicles[index] = newVehicle;
-        this.vehicleChanged.next(this.vehicles.slice());
+        const token = this.authService.getToken();
+        this.http.put(this.baseApiUrl + '/vehicles/' + index + '.json?auth=' + token, newVehicle)
+            .subscribe((res) => {
+                this.vehicles[index] = newVehicle;
+                this.vehicleChanged.next(this.vehicles.slice());
+            }, (err) => {
+                console.log(err);
+            });
     }
 
     deleteVehicle(index: number) {
         const token = this.authService.getToken();
-        this.http.delete('https://fleet-management-api.firebaseio.com/vehicles/' + index + '.json?auth=' + token)
+        this.http.delete(this.baseApiUrl + '/vehicles/' + index + '.json?auth=' + token)
             .subscribe((res) => {
                 this.vehicles.splice(index, 1);
                 this.vehicleChanged.next(this.vehicles.slice());
