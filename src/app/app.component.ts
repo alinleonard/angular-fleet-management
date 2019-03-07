@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AuthService } from './auth/auth.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Initialize Firebase
-    const config = {
-
-    };
-    firebase.initializeApp(config);
+    firebase.initializeApp(environment.firebase);
 
     this.authSerice.checkForStoredAuth();
   }
