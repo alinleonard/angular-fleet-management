@@ -14,47 +14,23 @@ export class VehicleService {
 
     constructor(private http: Http, private authService: AuthService) { }
 
-    private fetchVehiclesFromDatabase() {
-        const token = this.authService.getToken();
-        this.http.get(this.baseApiUrl + '?auth=' + token)
-            .pipe(map(
-                (response: Response) => {
-                    const vehicles: Vehicle[] = response.json();
-                    for (const vehicle of vehicles) {
-                        if (!vehicle['reminders']) {
-                            vehicle['reminders'] = [];
-                        }
-                        if (!vehicle['fuel']) {
-                            vehicle['fuel'] = [];
-                        }
-                    }
-                    return vehicles;
-                }
-            ))
-            .subscribe((vehicles: Vehicle[]) => {
-                this.vehicles = vehicles;
-                this.vehicleChanged.next(this.vehicles.slice());
-            });
-    }
-
-    private postVehiclesToDatabase(vehicle: Vehicle) {
-        const token = this.authService.getToken();
-        return this.http.post(this.baseApiUrl + '?auth=' + token, vehicle);
-    }
-
     getVehicles() {
         const token = this.authService.getToken();
         return this.http.get(this.baseApiUrl + '?auth=' + token)
             .pipe(map(
                 (response: Response) => {
-                    const vehicles: Vehicle[] = response.json();
-                    for (const vehicle of vehicles) {
-                        if (!vehicle['reminders']) {
-                            vehicle['reminders'] = [];
+                    let vehicles: Vehicle[] = response.json();
+                    if (vehicles) {
+                        for (const vehicle of vehicles) {
+                            if (!vehicle['reminders']) {
+                                vehicle['reminders'] = [];
+                            }
+                            if (!vehicle['fuel']) {
+                                vehicle['fuel'] = [];
+                            }
                         }
-                        if (!vehicle['fuel']) {
-                            vehicle['fuel'] = [];
-                        }
+                    } else {
+                        vehicles = [];
                     }
                     this.setVehicles(vehicles);
                     return vehicles;

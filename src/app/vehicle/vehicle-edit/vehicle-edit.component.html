@@ -3,10 +3,11 @@
     <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
-            <button class="btn btn-success" type="submit" [disabled]="!vehicleForm.valid">Save</button>
+            <button class="btn btn-success" type="submit" [disabled]="!vehicleForm.valid" style="margin-right: 5px;">Save</button>
             <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
         </div>
       </div>
+      <hr>
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
