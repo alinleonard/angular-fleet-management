@@ -88,7 +88,14 @@ export class VehicleService {
     }
 
     deleteVehicle(index: number) {
-        this.vehicles.splice(index, 1);
-        this.vehicleChanged.next(this.vehicles.slice());
+        const token = this.authService.getToken();
+        this.http.delete('https://fleet-management-api.firebaseio.com/vehicles/' + index + '.json?auth=' + token)
+            .subscribe((res) => {
+                this.vehicles.splice(index, 1);
+                this.vehicleChanged.next(this.vehicles.slice());
+            }, (err) => {
+                console.log(err);
+            }
+            );
     }
 }

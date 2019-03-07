@@ -71,7 +71,6 @@ export class AuthService {
     }
 
     checkForStoredAuth() {
-        console.log('check');
         firebase.auth().onAuthStateChanged(user => {
           if (user) {
             user.getIdToken().then(

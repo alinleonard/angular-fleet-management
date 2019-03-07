@@ -13,10 +13,11 @@ export class AppComponent implements OnInit {
   constructor(private authSerice: AuthService) { }
 
   ngOnInit() {
-    firebase.initializeApp({
-      apiKey: '',
-      authDomain: '',
-    });
+    // Initialize Firebase
+    const config = {
+
+    };
+    firebase.initializeApp(config);
 
     this.authSerice.checkForStoredAuth();
   }
