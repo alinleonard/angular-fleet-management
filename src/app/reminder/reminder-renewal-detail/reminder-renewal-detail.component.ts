@@ -19,6 +19,9 @@ export class ReminderRenewalDetailComponent implements OnInit {
       this.id = +params['id'];
       this.reminder = this.rService.getReminder(this.id);
     });
+    this.rService.remindersChanged.subscribe((reminders: Reminder[]) => {
+      this.reminder = reminders[this.id];
+    });
   }
 
   onDeleteReminder() {

@@ -26,7 +26,7 @@
   </div>
 </div>
 <hr>
-<div class="row">
+<div class="row" *ngIf="vehicle.reminders && reminders">
     <div class="col-xs-12">
       <h4>Reminder List</h4>
         <div class="list-group-item clearfix" *ngFor="let reminder of vehicle.reminders">

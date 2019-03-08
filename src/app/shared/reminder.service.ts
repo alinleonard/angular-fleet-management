@@ -39,17 +39,38 @@ export class ReminderService {
     }
 
     addReminder(reminder: Reminder) {
-        this.reminders.push(reminder);
-        this.remindersChanged.next(this.reminders.slice());
+        const token = this.authService.getToken();
+        const tempReminders: Reminder[] = [reminder];
+        this.http.put(this.baseApiUrl + '/reminders.json?auth=' + token, tempReminders)
+            .subscribe((res) => {
+                this.reminders.push(reminder);
+                this.remindersChanged.next(this.reminders.slice());
+            }, (err) => {
+                console.log(err);
+            });
     }
 
     updateReminder(index: number, newReminder: Reminder) {
-        this.reminders[index] = newReminder;
-        this.remindersChanged.next(this.reminders.slice());
+        const token = this.authService.getToken();
+
+        this.http.put(this.baseApiUrl + '/reminders/' + index + '.json?auth=' + token, newReminder)
+            .subscribe((res) => {
+                this.reminders[index] = newReminder;
+                this.remindersChanged.next(this.reminders.slice());
+            }, (err) => {
+                console.log(err);
+            });
     }
 
     deleteReminder(index: number) {
-        this.reminders.splice(index, 1);
-        this.remindersChanged.next(this.reminders.slice());
+        const token = this.authService.getToken();
+
+        this.http.delete(this.baseApiUrl + '/reminders/' + index + '.json?auth=' + token)
+            .subscribe((res) => {
+                this.reminders.splice(index, 1);
+                this.remindersChanged.next(this.reminders.slice());
+            }, (err) => {
+                console.log(err);
+            });
     }
 }
