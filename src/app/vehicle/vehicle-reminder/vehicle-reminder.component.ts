@@ -29,7 +29,10 @@ export class VehicleReminderComponent implements OnInit {
       this.vehicle = this.vService.getVehicle(this.index);
     });
 
-    this.rService.getReminders().subscribe((reminders: Reminder[]) => {
+    this.reminders = this.rService.getReminders();
+    this.rService.getRemindersFromServer();
+
+    this.rService.remindersChanged.subscribe((reminders: Reminder[]) => {
       this.reminders = reminders;
     });
 
@@ -45,8 +48,13 @@ export class VehicleReminderComponent implements OnInit {
     const reminders: VehicleReminder[] = updatedVehicle.reminders != null ? updatedVehicle.reminders : [];
     reminders.push(newReminder);
     updatedVehicle.reminders = reminders;
-    console.log(updatedVehicle);
     this.vService.updateVehicle(this.index, updatedVehicle);
+
+    this.vService.storeVehicleToServer().subscribe((res) => {
+      console.log('stored');
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   onRemoveReminder(reminderIndex: number) {

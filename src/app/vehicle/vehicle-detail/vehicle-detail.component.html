@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="vehicle">
   <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-12">
@@ -26,16 +26,16 @@
   </div>
 </div>
 <hr>
-<div class="row" *ngIf="vehicle.reminders && reminders">
-    <div class="col-xs-12">
-      <h4>Reminder List</h4>
-        <div class="list-group-item clearfix" *ngFor="let reminder of vehicle.reminders">
-          <div class="pull-left">
-            {{ reminders[reminder.reminderId].name }}
+  <div class="row" *ngIf="reminders">
+      <div class="col-xs-12" *ngIf="vehicle && vehicle.reminders && vehicle.reminders.length > 0">
+        <h4>Reminder List</h4>
+          <div class="list-group-item clearfix" *ngFor="let reminder of vehicle.reminders">
+            <div class="pull-left">
+              {{ reminders[reminder.reminderId].name }}
+            </div>
+            <div class="pull-right">
+              {{ reminder.date }}
+            </div>
           </div>
-          <div class="pull-right">
-            {{ reminder.date }}
-          </div>
-        </div>
-    </div>
-</div>
+      </div>
+  </div>

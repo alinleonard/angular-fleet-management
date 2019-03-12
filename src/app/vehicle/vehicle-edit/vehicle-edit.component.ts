@@ -68,7 +68,12 @@ export class VehicleEditComponent implements OnInit {
     } else {
       this.vService.addVehicle(this.vehicleForm.value);
     }
-    this.onCancel();
+
+    this.vService.storeVehicleToServer().subscribe((res) => {
+      this.onCancel();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   onCancel() {

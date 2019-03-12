@@ -27,9 +27,7 @@ export class TrackerEditComponent implements OnInit {
       this.trackerId = +params['id'];
       this.isEdit = params['id'] != null;
 
-      this.vehicleService.getVehicles().subscribe((vehicles: Vehicle[]) => {
-        this.vehicles = vehicles;
-      });
+      this.vehicles = this.vehicleService.getVehicles();
 
       this.initForm();
     });

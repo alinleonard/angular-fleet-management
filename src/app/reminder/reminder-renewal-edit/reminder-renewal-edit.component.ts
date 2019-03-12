@@ -41,7 +41,12 @@ export class ReminderRenewalEditComponent implements OnInit {
     } else {
       this.rService.addReminder(this.form.value);
     }
-    this.onCancel();
+
+    this.rService.storeRemindersToServer().subscribe((res) => {
+      this.onCancel();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   onCancel() {

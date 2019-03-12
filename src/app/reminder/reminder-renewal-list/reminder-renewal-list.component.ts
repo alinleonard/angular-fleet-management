@@ -16,9 +16,8 @@ export class ReminderRenewalListComponent implements OnInit, OnDestroy {
   constructor(private rService: ReminderService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.rService.getReminders().subscribe((reminders: Reminder[]) => {
-      this.reminders = reminders;
-    });
+    this.reminders = this.rService.getReminders();
+    this.rService.getRemindersFromServer();
 
     this.subscription =  this.rService.remindersChanged.subscribe((reminders) => {
       this.reminders = reminders;

@@ -25,9 +25,9 @@ export class VehicleListComponent implements OnInit, OnDestroy {
       this.vehicles = vehicles;
     });
 
-    this.vehicleService.getVehicles().subscribe((vehicles: Vehicle[]) => {
-      this.vehicles = vehicles;
-    });
+    this.vehicleService.getVehiclesFromServer();
+
+    this.vehicles = this.vehicleService.getVehicles();
   }
 
   onNewVehicle() {

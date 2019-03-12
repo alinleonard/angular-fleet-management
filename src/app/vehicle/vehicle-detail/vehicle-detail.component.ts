@@ -36,7 +36,9 @@ export class VehicleDetailComponent implements OnInit, OnDestroy {
       this.vehicle = this.vService.getVehicle(this.id);
     });
 
-    this.rService.getReminders().subscribe((reminders: Reminder[]) => {
+    this.reminders = this.rService.getReminders();
+
+    this.rService.remindersChanged.subscribe((reminders: Reminder[]) => {
       this.reminders = reminders;
     });
 
@@ -59,7 +61,11 @@ export class VehicleDetailComponent implements OnInit, OnDestroy {
 
   onDeleteVehicle() {
     this.vService.deleteVehicle(this.id);
-    this.router.navigate(['/vehicles']);
+    this.vService.storeVehicleToServer().subscribe((res) => {
+      this.router.navigate(['/vehicles']);
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   ngOnDestroy() {

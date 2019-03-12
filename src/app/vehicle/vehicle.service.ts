@@ -14,9 +14,41 @@ export class VehicleService {
 
     constructor(private http: Http, private authService: AuthService) { }
 
+    setVehicles(vehicles: Vehicle[]) {
+        this.vehicles = vehicles;
+        this.vehicleChanged.next(this.vehicles.slice());
+    }
+
     getVehicles() {
+       return this.vehicles.slice();
+    }
+
+    getVehicle(index: number) {
+        return this.vehicles[index];
+    }
+
+    addVehicle(vehicle: Vehicle) {
+        this.vehicles.push(vehicle);
+        this.vehicleChanged.next(this.vehicles.slice());
+    }
+
+    updateVehicle(index: number, newVehicle: Vehicle) {
+        this.vehicles[index] = newVehicle;
+        this.vehicleChanged.next(this.vehicles.slice());
+    }
+
+    deleteVehicle(index: number) {
+        this.vehicles.splice(index, 1);
+        this.vehicleChanged.next(this.vehicles.slice());
+    }
+
+    /**
+     * HTTP
+     */
+
+     getVehiclesFromServer() {
         const token = this.authService.getToken();
-        return this.http.get(this.baseApiUrl + '/vehicles.json?auth=' + token)
+        this.http.get(this.baseApiUrl + '/vehicles.json?auth=' + token)
             .pipe(map(
                 (response: Response) => {
                     let vehicles: Vehicle[] = response.json();
@@ -32,52 +64,16 @@ export class VehicleService {
                     } else {
                         vehicles = [];
                     }
-                    this.setVehicles(vehicles);
                     return vehicles;
                 }
-            ));
-    }
-
-    setVehicles(vehicles: Vehicle[]) {
-        this.vehicles = vehicles;
-    }
-
-    getVehicle(index: number) {
-        return this.vehicles[index];
-    }
-
-    addVehicle(vehicle: Vehicle) {
-        const token = this.authService.getToken();
-        const tempVehicles: Vehicle[] = [vehicle];
-        this.http.put(this.baseApiUrl + '/vehicles.json?auth=' + token, tempVehicles).subscribe((res) => {
-            console.log(res);
-            this.vehicles.push(vehicle);
-            this.vehicleChanged.next(this.vehicles.slice());
-        }, (error) => {
-            console.log(error);
-        });
-    }
-
-    updateVehicle(index: number, newVehicle: Vehicle) {
-        const token = this.authService.getToken();
-        this.http.put(this.baseApiUrl + '/vehicles/' + index + '.json?auth=' + token, newVehicle)
-            .subscribe((res) => {
-                this.vehicles[index] = newVehicle;
-                this.vehicleChanged.next(this.vehicles.slice());
-            }, (err) => {
-                console.log(err);
+            ))
+            .subscribe((vehicles: Vehicle[]) => {
+                this.setVehicles(vehicles);
             });
-    }
+     }
 
-    deleteVehicle(index: number) {
+     storeVehicleToServer() {
         const token = this.authService.getToken();
-        this.http.delete(this.baseApiUrl + '/vehicles/' + index + '.json?auth=' + token)
-            .subscribe((res) => {
-                this.vehicles.splice(index, 1);
-                this.vehicleChanged.next(this.vehicles.slice());
-            }, (err) => {
-                console.log(err);
-            }
-            );
+        return this.http.put(this.baseApiUrl + '/vehicles.json?auth=' + token, this.getVehicles());
     }
 }

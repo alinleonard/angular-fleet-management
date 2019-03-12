@@ -10,14 +10,45 @@ export class ReminderService {
     remindersChanged = new Subject<Reminder[]>();
     private baseApiUrl = 'https://fleet-management-api.firebaseio.com';
 
-    private reminders: Reminder[] = [new Reminder('Asigurare RCA'), new Reminder('Vinieta')];
+    private reminders: Reminder[] = [];
 
     constructor(private http: Http, private authService: AuthService) { }
 
     getReminders() {
-        // return this.reminders.slice();
+        return this.reminders.slice();
+    }
+
+    getReminder(index: number) {
+        return this.reminders[index];
+    }
+
+    setReminders(reminders: Reminder[]) {
+        this.reminders = reminders;
+        this.remindersChanged.next(this.reminders.slice());
+    }
+
+    addReminder(reminder: Reminder) {
+        this.reminders.push(reminder);
+        this.remindersChanged.next(this.reminders.slice());
+    }
+
+    updateReminder(index: number, newReminder: Reminder) {
+        this.reminders[index] = newReminder;
+        this.remindersChanged.next(this.reminders.slice());
+    }
+
+    deleteReminder(index: number) {
+        this.reminders.splice(index, 1);
+        this.remindersChanged.next(this.reminders.slice());
+    }
+
+    /**
+     * HTTP
+     */
+
+     getRemindersFromServer() {
         const token = this.authService.getToken();
-        return this.http.get(this.baseApiUrl + '/reminders.json?auth=' + token)
+        this.http.get(this.baseApiUrl + '/reminders.json?auth=' + token)
             .pipe(map(
                 (response: Response) => {
                     let reminders: Reminder[] = response.json();
@@ -27,50 +58,14 @@ export class ReminderService {
                     this.setReminders(reminders);
                     return reminders;
                 }
-            ));
-    }
-
-    getReminder(index: number) {
-        return this.reminders[index];
-    }
-
-    setReminders(reminders: Reminder[]) {
-        this.reminders = reminders;
-    }
-
-    addReminder(reminder: Reminder) {
-        const token = this.authService.getToken();
-        const tempReminders: Reminder[] = [reminder];
-        this.http.put(this.baseApiUrl + '/reminders.json?auth=' + token, tempReminders)
-            .subscribe((res) => {
-                this.reminders.push(reminder);
-                this.remindersChanged.next(this.reminders.slice());
-            }, (err) => {
-                console.log(err);
+            ))
+            .subscribe((reminders: Reminder[]) => {
+                this.setReminders(reminders);
             });
-    }
+     }
 
-    updateReminder(index: number, newReminder: Reminder) {
+     storeRemindersToServer() {
         const token = this.authService.getToken();
-
-        this.http.put(this.baseApiUrl + '/reminders/' + index + '.json?auth=' + token, newReminder)
-            .subscribe((res) => {
-                this.reminders[index] = newReminder;
-                this.remindersChanged.next(this.reminders.slice());
-            }, (err) => {
-                console.log(err);
-            });
-    }
-
-    deleteReminder(index: number) {
-        const token = this.authService.getToken();
-
-        this.http.delete(this.baseApiUrl + '/reminders/' + index + '.json?auth=' + token)
-            .subscribe((res) => {
-                this.reminders.splice(index, 1);
-                this.remindersChanged.next(this.reminders.slice());
-            }, (err) => {
-                console.log(err);
-            });
-    }
+        return this.http.put(this.baseApiUrl + '/reminders.json?auth=' + token, this.getReminders());
+     }
 }

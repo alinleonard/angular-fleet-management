@@ -26,7 +26,11 @@ export class ReminderRenewalDetailComponent implements OnInit {
 
   onDeleteReminder() {
     this.rService.deleteReminder(this.id);
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.rService.storeRemindersToServer().subscribe((res) => {
+      this.router.navigate(['../'], { relativeTo: this.route });
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }
