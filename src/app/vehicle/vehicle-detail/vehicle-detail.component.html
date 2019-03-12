@@ -26,16 +26,16 @@
   </div>
 </div>
 <hr>
-  <div class="row" *ngIf="reminders">
-      <div class="col-xs-12" *ngIf="vehicle && vehicle.reminders && vehicle.reminders.length > 0">
-        <h4>Reminder List</h4>
-          <div class="list-group-item clearfix" *ngFor="let reminder of vehicle.reminders">
-            <div class="pull-left">
-              {{ reminders[reminder.reminderId].name }}
-            </div>
-            <div class="pull-right">
-              {{ reminder.date }}
-            </div>
+<div class="row" *ngIf="reminders && reminders.length > 0">
+    <div class="col-xs-12" *ngIf="vehicle && vehicle.reminders && vehicle.reminders.length > 0">
+      <h4>Reminder List</h4>
+        <div class="list-group-item clearfix" *ngFor="let vehicleReminder of vehicle.reminders">
+          <div class="pull-left">
+            {{ reminders[vehicleReminder.reminderId].name }}
           </div>
-      </div>
-  </div>
+          <div class="pull-right">
+            {{ vehicleReminder.date }}
+          </div>
+        </div>
+    </div>
+</div>

@@ -12,7 +12,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./vehicle-detail.component.scss']
 })
 export class VehicleDetailComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
+  vehicleSubscription: Subscription;
+  reminderSubscription: Subscription;
   vehicle: Vehicle;
   id: number;
 
@@ -38,13 +39,19 @@ export class VehicleDetailComponent implements OnInit, OnDestroy {
 
     this.reminders = this.rService.getReminders();
 
-    this.rService.remindersChanged.subscribe((reminders: Reminder[]) => {
+    this.reminderSubscription = this.rService.remindersChanged.subscribe((reminders: Reminder[]) => {
       this.reminders = reminders;
     });
 
-    this.subscription = this.vService.vehicleChanged.subscribe((vehicles: Vehicle[]) => {
+    this.vehicleSubscription = this.vService.vehicleChanged.subscribe((vehicles: Vehicle[]) => {
       this.vehicle = vehicles[this.id];
     });
+
+    this.syncDataFromServer();
+  }
+
+  syncDataFromServer() {
+    this.rService.getRemindersFromServer();
   }
 
   onEditVehicle() {
@@ -69,7 +76,8 @@ export class VehicleDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.reminderSubscription.unsubscribe();
+    this.vehicleSubscription.unsubscribe();
   }
 
 }
