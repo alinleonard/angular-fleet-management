@@ -5,25 +5,26 @@
     </div>
   </div>
   <div class="col-md-4">
-    <div class="row" *ngIf="assignedTrackers.length > 0">
+    <div class="row" *ngIf="trackers.length > 0">
       <div class="col-xs-12">
         <h3>Vehicles</h3>
-        <a class="list-group-item clearfix" *ngFor="let tracker of assignedTrackers" (click)="onTrackerSelect(tracker.id)" style="cursor: pointer;">
+        <a class="list-group-item clearfix" *ngFor="let tracker of trackers | vehicleAssigned" (click)="onTrackerSelect(tracker['_id'])" style="cursor: pointer;">
             <div class="pull-left">
               <h5 class="list-group-item-heading">{{ tracker.vehicleId }}</h5>
-              <p class="list-group-item-text">Phone: {{ tracker.phone }} Tracker Id: {{ tracker.id }}</p>
+              <p class="list-group-item-text">Phone: {{ tracker.phone }} Tracker Id: {{ tracker['_id'] }}</p>
             </div>
         </a>
       </div>
     </div>
     <hr>
-    <div class="row" *ngIf="unassignedTrackers.length > 0">
+    <div class="row" *ngIf="trackers.length > 0">
       <div class="col-xs-12">
         <h3>Unasigned Trackers</h3>
-        <a class="list-group-item clearfix" *ngFor="let tracker of unassignedTrackers" (click)="onTrackerSelect(tracker.id)" style="cursor: pointer;">
-            <div class="pull-left">
+        <a class="list-group-item clearfix" *ngFor="let tracker of trackers | vehicleUnassigned" (click)="onTrackerSelect(tracker['_id'])" style="cursor: pointer;">
+            <div class="pull-left" *ngIf="!tracker.vehicleId">
               <h5 class="list-group-item-heading">{{tracker.sn }}</h5>
               <p class="list-group-item-text">{{tracker.phone}}</p>
+              {{ tracker['_id'] }}
             </div>
         </a>
       </div>

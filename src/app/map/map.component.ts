@@ -14,9 +14,9 @@ export class MapComponent implements OnInit, OnDestroy {
   private markerLayer: any;
   private polylineLayer: any;
   private subscription: Subscription;
+  private trackersChangedSubscription: Subscription;
 
-  unassignedTrackers: Tracker[];
-  assignedTrackers: Tracker[];
+  trackers: Tracker[];
 
   constructor(private tService: TrackerService) {}
 
@@ -32,8 +32,11 @@ export class MapComponent implements OnInit, OnDestroy {
       this.renderOnMap(tracker);
     });
 
-    this.unassignedTrackers = this.tService.getUnassinedTrackers();
-    this.assignedTrackers = this.tService.getAssignedTrackers();
+    this.trackers = this.tService.getTrackers();
+    this.tService.getTrackersFromServer();
+    this.trackersChangedSubscription = this.tService.trackerChanged.subscribe((trackers) => {
+      this.trackers = trackers;
+    });
   }
 
   renderOnMap(tracker: Tracker) {
@@ -44,7 +47,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.polylineLayer.clearLayers();
     }
 
-    if (tracker.positions === undefined) {
+    if (tracker.positions === undefined || tracker.positions.length <= 0) {
       return true;
     }
 
@@ -117,5 +120,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.trackersChangedSubscription.unsubscribe();
   }
 }

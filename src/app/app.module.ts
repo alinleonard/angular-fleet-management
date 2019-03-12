@@ -40,6 +40,8 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { HttpModule} from '@angular/http';
+import { VehicleAssignedPipe } from './map/vehicleAssigned.pipe';
+import { VehicleUnassignedPipe } from './map/vehicleUnassined.pipe';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { HttpModule} from '@angular/http';
     VehicleFuelEditComponent,
     VehicleFuelDetailComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    VehicleAssignedPipe,
+    VehicleUnassignedPipe
   ],
   imports: [
     BrowserModule,

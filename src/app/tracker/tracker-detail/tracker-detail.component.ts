@@ -27,7 +27,11 @@ export class TrackerDetailComponent implements OnInit {
 
   onDelete() {
     this.trackerService.deleteTracker(this.trackerId);
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.trackerService.storeTrackersToServer().subscribe((res) => {
+      this.router.navigate(['../'], { relativeTo: this.route });
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

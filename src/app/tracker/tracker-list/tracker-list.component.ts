@@ -17,6 +17,7 @@ export class TrackerListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.trackers = this.trackerService.getTrackers();
+    this.trackerService.getTrackersFromServer();
     this.subscription = this.trackerService.trackerChanged.subscribe((trackers) => {
       this.trackers = trackers;
     });

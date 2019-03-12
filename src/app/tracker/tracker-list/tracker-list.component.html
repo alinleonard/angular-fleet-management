@@ -8,6 +8,6 @@
 <hr>
 <div class="row">
   <div class="col-xs-12">
-    <app-tracker-item [tracker]="tracker" *ngFor="let tracker of trackers"></app-tracker-item>
+    <app-tracker-item [index]="i" [tracker]="tracker" *ngFor="let tracker of trackers; let i = index;"></app-tracker-item>
   </div>
 </div>

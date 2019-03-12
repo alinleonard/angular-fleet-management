@@ -1,5 +1,4 @@
 export class Tracker {
-    public id: number;
     public vehicleId?: number;
 
     public sn: string;
@@ -15,8 +14,7 @@ export class Tracker {
 
     public type?: string;
 
-    constructor(id: number, sn: string, phone: string) {
-        this.id = id;
+    constructor(sn: string, phone: string) {
         this.sn = sn;
         this.phone = phone;
     }

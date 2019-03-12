@@ -8,6 +8,7 @@ import { Tracker } from '../../tracker.model';
 })
 export class TrackerItemComponent implements OnInit {
   @Input() tracker: Tracker;
+  @Input() index; number;
 
   constructor() { }
 

@@ -28,6 +28,11 @@ export class TrackerEditComponent implements OnInit {
       this.isEdit = params['id'] != null;
 
       this.vehicles = this.vehicleService.getVehicles();
+      this.vehicleService.getVehiclesFromServer();
+
+      this.vehicleService.vehicleChanged.subscribe((vehicles: Vehicle[]) => {
+        this.vehicles = vehicles;
+      });
 
       this.initForm();
     });
@@ -38,16 +43,15 @@ export class TrackerEditComponent implements OnInit {
     let phone = '';
     let vehicleId = null;
     let vehicleName = '';
+
     if (this.isEdit) {
       const tracker = this.trackerService.getTracker(this.trackerId);
       sn = tracker.sn;
       phone = tracker.phone;
       vehicleId = tracker.vehicleId;
-      if (vehicleId !== null && vehicleId !== undefined) {
-        console.log(vehicleId);
-        vehicleName = this.vehicles.find(vehicle => vehicle._id === vehicleId).name;
-      }
+      vehicleName = this.vehicles[vehicleId].name;
     }
+
     this.form = new FormGroup({
       sn: new FormControl(sn, Validators.required),
       phone: new FormControl(phone, Validators.required),
@@ -74,8 +78,15 @@ export class TrackerEditComponent implements OnInit {
   onSubmit() {
     if (!this.isEdit) {
       this.trackerService.addTracker(this.form.value);
+    } else {
+      this.trackerService.updateTracker(this.form.value, this.trackerId);
     }
-    this.onCancel();
+
+    this.trackerService.storeTrackersToServer().subscribe((res) => {
+      this.onCancel();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   onCancel() {
