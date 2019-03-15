@@ -3,8 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Reminder } from 'src/app/shared/reminder.module';
 import { ReminderService } from 'src/app/shared/reminder.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VehicleService } from '../vehicle.service';
-import { Vehicle } from '../vehicle.model';
+import { VehicleService } from '../shared/vehicle.service';
+import { Vehicle } from '../shared/vehicle.model';
 import { VehicleReminder } from './vehicle-reminder.model';
 
 @Component({

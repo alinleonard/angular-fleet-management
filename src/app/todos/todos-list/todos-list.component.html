@@ -1,0 +1,4 @@
+<div *ngFor="let data of todos | async" class="list-group">
+    <app-todo-detail [todo]='data.payload.val()' [key]="data.payload.key"></app-todo-detail>
+</div>
+<button (click)='onDeleteTodos()'>Delete Entire List</button>

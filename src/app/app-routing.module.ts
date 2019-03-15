@@ -22,6 +22,9 @@ import { VehicleFuelEditComponent } from './vehicle/vehicle-fuel/vehicle-fuel-ed
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthGuard } from './auth/auth-guard.service';
+import { TodosListComponent } from './todos/todos-list/todos-list.component';
+import { TodoFormComponent } from './todos/todo-form/todo-form.component';
+import { TodoStartComponent } from './todos/todo-start/todo-start.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/vehicles', pathMatch: 'full' },
@@ -67,6 +70,13 @@ const appRoutes: Routes = [
         path: 'map',
         canActivate: [AuthGuard],
         component: MapComponent
+    },
+    {
+        path: 'todos',
+        component: TodoStartComponent,
+        children: [
+            { path: '', component: TodoFormComponent }
+        ]
     },
     {
         path: 'signup',

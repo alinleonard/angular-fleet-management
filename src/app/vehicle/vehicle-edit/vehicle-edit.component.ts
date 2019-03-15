@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Vehicle } from '../vehicle.model';
-import { VehicleService } from '../vehicle.service';
+import { Vehicle } from '../shared/vehicle.model';
+import { VehicleService } from '../shared/vehicle.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgForm, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 

@@ -17,7 +17,7 @@ import { VehicleStartComponent } from './vehicle/vehicle-start/vehicle-start.com
 import { DropdownDirective } from './shared/dropdown.directive';
 import { VehicleListComponent } from './vehicle/vehicle-list/vehicle-list.component';
 
-import { VehicleService } from 'src/app/vehicle/vehicle.service';
+import { VehicleService } from 'src/app/vehicle/shared/vehicle.service';
 import { ReminderService } from 'src/app/shared/reminder.service';
 import { ReminderStartComponent } from './reminder/reminder-start/reminder-start.component';
 import { ReminderRenewalEditComponent } from './reminder/reminder-renewal-edit/reminder-renewal-edit.component';
@@ -42,6 +42,16 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { HttpModule} from '@angular/http';
 import { VehicleAssignedPipe } from './map/vehicleAssigned.pipe';
 import { VehicleUnassignedPipe } from './map/vehicleUnassined.pipe';
+import { LoadingSpinnerComponent } from './shared/ui/loading-spinner/loading-spinner.component';
+import { TodosListComponent } from './todos/todos-list/todos-list.component';
+import { TodoDetailComponent } from './todos/todo-detail/todo-detail.component';
+import { TodoFormComponent } from './todos/todo-form/todo-form.component';
+import { TodoService } from './todos/shared/todo.service';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
+import { TodoStartComponent } from './todos/todo-start/todo-start.component';
 
 @NgModule({
   declarations: [
@@ -76,16 +86,24 @@ import { VehicleUnassignedPipe } from './map/vehicleUnassined.pipe';
     SignupComponent,
     SigninComponent,
     VehicleAssignedPipe,
-    VehicleUnassignedPipe
+    VehicleUnassignedPipe,
+    LoadingSpinnerComponent,
+    TodosListComponent,
+    TodoDetailComponent,
+    TodoFormComponent,
+    TodoStartComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
-  providers: [VehicleService, ReminderService, TrackerService, AuthService, AuthGuard],
+  providers: [VehicleService, ReminderService, TrackerService, AuthService, TodoService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

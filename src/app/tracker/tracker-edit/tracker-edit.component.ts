@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Vehicle } from 'src/app/vehicle/vehicle.model';
-import { VehicleService } from 'src/app/vehicle/vehicle.service';
+import { Vehicle } from 'src/app/vehicle/shared/vehicle.model';
+import { VehicleService } from 'src/app/vehicle/shared/vehicle.service';
 import { TrackerService } from '../tracker.service';
 
 @Component({

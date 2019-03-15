@@ -1,7 +1,7 @@
 import { Vehicle } from './vehicle.model';
 import { Subject, throwError } from 'rxjs';
 import { Http, Response } from '@angular/http';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 

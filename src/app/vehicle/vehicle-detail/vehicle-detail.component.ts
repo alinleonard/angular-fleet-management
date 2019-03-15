@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { Vehicle } from '../vehicle.model';
+import { Vehicle } from '../shared/vehicle.model';
 import { Reminder } from 'src/app/shared/reminder.module';
 import { ReminderService } from 'src/app/shared/reminder.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { VehicleService } from '../vehicle.service';
+import { VehicleService } from '../shared/vehicle.service';
 import { Subscription } from 'rxjs';
 
 @Component({

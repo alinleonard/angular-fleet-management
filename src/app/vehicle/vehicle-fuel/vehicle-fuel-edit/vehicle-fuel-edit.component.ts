@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { VehicleService } from '../../vehicle.service';
+import { VehicleService } from '../../shared/vehicle.service';
 import { VehicleFuel } from '../vehicle-fuel.model';
 
 @Component({

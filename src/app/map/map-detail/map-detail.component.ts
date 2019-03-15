@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TrackerService } from '../../tracker/tracker.service';
 import { Tracker } from '../../tracker/tracker.model';
-import { Vehicle } from 'src/app/vehicle/vehicle.model';
-import { VehicleService } from 'src/app/vehicle/vehicle.service';
+import { Vehicle } from 'src/app/vehicle/shared/vehicle.model';
+import { VehicleService } from 'src/app/vehicle/shared/vehicle.service';
 import { Subscription } from 'rxjs';
 
 @Component({

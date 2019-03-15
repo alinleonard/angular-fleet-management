@@ -1,8 +1,8 @@
-import { VehicleReminder } from './vehicle-reminder/vehicle-reminder.model';
-import { VehicleFuel } from './vehicle-fuel/vehicle-fuel.model';
+import { VehicleReminder } from '../vehicle-reminder/vehicle-reminder.model';
+import { VehicleFuel } from '../vehicle-fuel/vehicle-fuel.model';
 
 export class Vehicle {
-    public _id: number;
+    public $key: string;
     public name: string;
     public manufacturer: string;
     public model: string;
@@ -10,8 +10,7 @@ export class Vehicle {
     public reminders: VehicleReminder[];
     public fuel: VehicleFuel[];
 
-    constructor(id: number, name: string, manufacturer: string, model: string, year: number) {
-        this._id = id;
+    constructor(name: string, manufacturer: string, model: string, year: number) {
         this.name = name;
         this.manufacturer = manufacturer;
         this.model = model;

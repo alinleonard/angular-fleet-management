@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Vehicle } from 'src/app/vehicle/vehicle.model';
+import { Vehicle } from 'src/app/vehicle/shared/vehicle.model';
 import { Subscription } from 'rxjs';
-import { VehicleService } from 'src/app/vehicle/vehicle.service';
+import { VehicleService } from 'src/app/vehicle/shared/vehicle.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,6 +12,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class VehicleListComponent implements OnInit, OnDestroy {
   vehicles: Vehicle[];
   private subscription: Subscription;
+
+  loading: Boolean = true;
 
   constructor(
     private vehicleService: VehicleService,

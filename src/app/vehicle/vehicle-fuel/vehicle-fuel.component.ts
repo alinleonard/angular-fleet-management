@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VehicleService } from '../vehicle.service';
+import { VehicleService } from '../shared/vehicle.service';
 import { Subscription } from 'rxjs';
-import { Vehicle } from '../vehicle.model';
+import { Vehicle } from '../shared/vehicle.model';
 import { VehicleFuel } from './vehicle-fuel.model';
 
 @Component({
