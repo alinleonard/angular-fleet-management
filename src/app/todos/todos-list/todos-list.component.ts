@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireList, } from '@angular/fire/database';
-import { Todo } from '../shared/todo';
 import { TodoService } from '../shared/todo.service';
 import { Observable } from 'rxjs';
 
@@ -13,10 +11,15 @@ import { Observable } from 'rxjs';
 export class TodosListComponent implements OnInit {
   public todos: Observable<any[]>;
 
+  loading = true;
+
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
     this.todos = this.todoService.getTodosList().snapshotChanges();
+    this.todos.subscribe(() => {
+      this.loading = false;
+    });
   }
 
   onDeleteTodos() {

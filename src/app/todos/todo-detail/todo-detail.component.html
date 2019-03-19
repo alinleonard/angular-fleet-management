@@ -1,8 +1,8 @@
 <a class="list-group-item d-flex justify-content-between align-items-center">
-    <h5 class="mb-1">{{ todo.title || 'missing title' }}</h5>
+    <h4 class="mb-1">{{ todo.title || 'missing title' }}</h4>
     <span class="badge badge-primary badge-pill">{{ todo.active }}</span>
-    <div class="mb-1">
-        <button type="button" class="btn btn-info" (click)='onUpdateTimeStamp()'>Update Timestamp</button>
+    <div class="mb-1 btn-group">
+        <button type="button" class="btn btn-info" (click)='onUpdateTimeStamp()'>Update the day</button>
         <button type="button" class="btn btn-success" *ngIf='todo.active' (click)='onUpdateActive(false)'>Mark Complete</button>
         <button type="button" class="btn btn-primary" *ngIf='!todo.active' (click)='onUpdateActive(true)'>Mark Active</button>
         <button class="btn btn-danger" type="button" (click)='onDeleteTodo()'>Delete</button>
